@@ -49,15 +49,17 @@
 [X] - fix ini parser
 [X] - test ulp
 [X/2] - md files
-[ ] - git repository
+[X] - git repository
+[ ] - Versions
 [ ] - exception report!
+[ ] - CME Critical managment engine
 [ ] - plugins load sequance
 [ ] - fix file names
 [ ] - check classes and add operators
 [ ] - fix to do
 [ ] - compiler error output!
 [ ] - error handling in interpretator
-[ ] - CME Critical managment engine
+[ ] - multithreading
 
 [?] - ULP C Interface!
 [ ] ! - fix error with invalid unordered map keys 
