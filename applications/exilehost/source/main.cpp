@@ -4,7 +4,6 @@
 
 #include <iostream>
 
-
 #if defined(EXILE_WIN)
 #include<Windows.h>
 #include<dbghelp.h>
@@ -78,10 +77,18 @@ void printStackTrace() {
 #include <stdio.h>
 #include <stdlib.h>
 
+#include <cxxabi.h>
+#include <dlfcn.h>
+#include <stdlib.h>
+#include <execinfo.h>
+
+
+
 void printStackTrace() {
 	void* stackTrace[10];
 	int stackSize = backtrace(stackTrace, 10);
 	char** stackSymbols = backtrace_symbols(stackTrace, stackSize);
+
 
 	if (stackSymbols == nullptr) {
 		perror("backtrace_symbols");
@@ -95,6 +102,7 @@ void printStackTrace() {
 	free(stackSymbols);
 }
 
+
 #endif
 
 
@@ -105,21 +113,46 @@ void printStackTrace() {
  *
  */
 
+void PrintVersion(const exVersion* version)
+{
+    char buffer[1024];
+    u32 len = exVersionStr(version, 1024, buffer);
+    if (len >= 1024)
+    {
+        char* dBuffer = exile::memory::AllocRaw<char>(len + 1);
+        exVersionStr(version, len, dBuffer);
+        puts(dBuffer);
+        puts("\n");
+        exile::memory::Free(dBuffer);
+    }
 
+    puts(buffer);
+
+}
+
+void test()
+{
+    printStackTrace();
+}
 
 int main()
 {
 	try 
 	{
-		exSetupCriticalDefaultConfiguration();
+        puts(EX_BUILD_DATETIME);
+        exSetupCriticalDefaultConfiguration();
 		exile::core::Engine& engine = exile::core::Engine::Get();
 		engine.GetPluginManager().LoadPlugin("exDefaultULP");
-		
+        exile::core::IPlugin* plugin = engine.GetPluginManager().GetPluginByName("exDefaultULP");
+        PrintVersion(&plugin->GetVersion());
 
 		engine.GetULP().Log(engine.GetULP().GetCoreId(), exile::LogLevel::Info, "starting loading");
 
 		engine.GetPluginManager().UnloadPlugins();
 	} 
+    catch (const std::out_of_range& ofr)
+    {
+    }
 	catch (const std::exception& ex)
 	{
 #if defined(EXILE_WIN)
@@ -128,6 +161,7 @@ int main()
 #elif defined(EXILE_UNIX)
 		std::cout << "errno:" << errno << ":" << ex.what() << std::endl;
 		printStackTrace();
+
 #endif
 	}
 	return 0;

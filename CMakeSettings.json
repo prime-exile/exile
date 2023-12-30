@@ -54,7 +54,14 @@
       "buildCommandArgs": "",
       "ctestCommandArgs": "",
       "inheritEnvironments": [ "linux_x64" ],
-      "wslPath": "${defaultWSLPath}"
+      "wslPath": "${defaultWSLPath}",
+      "variables": [
+        {
+          "name": "EXILE_DEFAULT_ULP_STDOUT",
+          "value": "True",
+          "type": "BOOL"
+        }
+      ]
     }
   ]
 }

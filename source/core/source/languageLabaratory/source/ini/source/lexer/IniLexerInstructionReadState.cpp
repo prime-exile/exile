@@ -1,3 +1,4 @@
+#define EXILE_PRIVATE
 #include <exile/ll/ini/iniLexerStateMachine.hpp>
 
 exile::ll::IniLexerInstructionReadState::IniLexerInstructionReadState(iniLexerStateMachine* machine)

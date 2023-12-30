@@ -12,7 +12,7 @@ class EXILE_API_EXPORT TastablePlugin : public exile::core::IPlugin
 public:
 
 	TastablePlugin(const exile::String& name, u8 type, int handle)
-		:exile::core::IPlugin(name, type), h(handle)
+		:exile::core::IPlugin(name, type, exVersion{0}), h(handle)
 	{
 
 	}
@@ -41,7 +41,7 @@ public:
 	}
 
 
-	u8 operator()(exile::core::PluginManager* manager, const exile::String& entry, exile::core::PluginId id) override
+	u8 operator()(exile::core::PluginManager* manager, const exile::String& entry, const exVersion& version, exile::core::PluginId id) override
 	{
 
 		exile::ll::IniParser parser;

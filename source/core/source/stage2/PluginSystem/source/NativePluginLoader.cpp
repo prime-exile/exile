@@ -35,9 +35,9 @@ u8 exile::core::NativePluginLoader::operator()(exile::core::PluginManager* manag
 	return Load(manager, entry);
 }
 
-u8 exile::core::NativePluginLoader::operator()(exile::core::PluginManager* manager, const exile::String& entry, PluginId id)
+u8 exile::core::NativePluginLoader::operator()(exile::core::PluginManager* manager, const exile::String& entry, const exVersion& version, PluginId id)
 {
-	return Load(manager, entry, id);
+	return Load(manager, entry, version, id);
 }
 
 void exile::core::NativePluginLoader::Unload(exile::core::IPlugin* iplugin, PluginId id)
@@ -61,7 +61,7 @@ void exile::core::NativePluginLoader::Unload(exile::core::IPlugin* iplugin)
 	exile::memory::Free(plugin);
 }
 
-u8 exile::core::NativePluginLoader::Load(exile::core::PluginManager* manager, const exile::String& entry,PluginId id)
+u8 exile::core::NativePluginLoader::Load(exile::core::PluginManager* manager, const exile::String& entry, const exVersion& version, PluginId id)
 {
 #if defined(EXILE_WIN)
 	RawPluginHandle handle = LoadLibraryA(entry.c_str());
@@ -86,7 +86,7 @@ u8 exile::core::NativePluginLoader::Load(exile::core::PluginManager* manager, co
 		pluginName = exPluginName();
 	}
 
-	exile::core::NativePlugin* plugin = exile::memory::Alloc<exile::core::NativePlugin>(pluginName, SupportedPluginType(), handle);
+	exile::core::NativePlugin* plugin = exile::memory::Alloc<exile::core::NativePlugin>(pluginName, SupportedPluginType(), handle, version);
 
 	PFNexPluginInit2 exPluginInit = reinterpret_cast<PFNexPluginInit2>(plugin->GetProcAddress("exPluginInit"));
 	if (exPluginInit != NULL)

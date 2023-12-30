@@ -6,6 +6,11 @@
 #include <exile/core/plugin.hpp>
 #include <exile/core/pluginManager.hpp>
 
+extern "C"
+{
+#include <exile/core/version.h>
+}
+
 #if defined (EXILE_WIN)
 #include <Windows.h>
 #elif defined(EXILE_UNIX)
@@ -32,14 +37,14 @@ namespace exile
 			NativePluginLoader();
 
 			u8 operator()(exile::core::PluginManager* manager, const exile::String& entry);
-			u8 operator()(exile::core::PluginManager* manager, const exile::String& entry, exile::core::PluginId id) override;
+			u8 operator()(exile::core::PluginManager* manager, const exile::String& entry, const exVersion& version, exile::core::PluginId id) override;
 
 			exile::String GetPluginTypeTitle() const override;
 
 			void Unload(exile::core::IPlugin* plugin);
 			void Unload(exile::core::IPlugin* plugin, PluginId id) override;
 			u8 Load(exile::core::PluginManager* manager, const exile::String& directory);
-			u8 Load(exile::core::PluginManager* manager, const exile::String& directory, exile::core::PluginId id);
+			u8 Load(exile::core::PluginManager* manager, const exile::String& directory,  const exVersion& version, exile::core::PluginId id);
 
 		};
 
@@ -53,6 +58,7 @@ namespace exile
 
 			NativePlugin(RawPluginHandle handle);
 			NativePlugin(u8 type, RawPluginHandle handle);
+			NativePlugin(const exile::String& name, u8 type, RawPluginHandle handle, const exVersion& version);
 			NativePlugin(const exile::String& name, u8 type, RawPluginHandle handle);
 			NativePlugin(const exile::String& name, RawPluginHandle handle);
 

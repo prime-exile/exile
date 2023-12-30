@@ -1,9 +1,7 @@
-#include "exile/core/memory.hpp"
-#include <cstdio>
 #define EXILE_PRIVATE
 #include <exile/core/ulp/UniversalLoggingProtocol.hpp>
 
-
+#include <cstdio>
 #include <algorithm> 
 #include <stdarg.h>
 
@@ -39,7 +37,7 @@ const  exile::LogId& exile::UniversalLoggingProtocol::GetCoreId() const
 	return coreId;
 }
 
-void exile::UniversalLoggingProtocol::Log(u64 sourceId, exile::LogLevel l, const exile::String& desc)
+void exile::UniversalLoggingProtocol::Log(LogId sourceId, exile::LogLevel l, const exile::String& desc)
 {
 	const exile::LogSource& src = sources[sourceId];
 
@@ -52,7 +50,7 @@ void exile::UniversalLoggingProtocol::Log(u64 sourceId, exile::LogLevel l, const
 	}
 }
 
-void exile::UniversalLoggingProtocol::Log(u64 sourceId, exile::LogLevel l, const char* desc, ...)
+void exile::UniversalLoggingProtocol::Log(LogId sourceId, exile::LogLevel l, const char* desc, ...)
 {
 	/*
 		CMake option:

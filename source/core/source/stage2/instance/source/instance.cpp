@@ -53,13 +53,22 @@ u8 exile::core::Engine::LoadAllPluginsFromFolder(const exile::core::Path& folder
 }
 
 exile::core::Engine::Engine()
+	:consoleShell(&centralManagmentEngine)
 {
 	pluginManager.AddPluginLoader(&nativePluginLoader);
+	centralManagmentEngine.SetupShell(&consoleShell);
 }
 
 exile::UniversalLoggingProtocol& exile::core::Engine::GetULP()
 {
 	return ulp;
+}
+
+u8 exile::core::Engine::GoToCMEPanic(const char* message)
+{
+	centralManagmentEngine.SetPanicMessage(message);
+	centralManagmentEngine.RunShell();
+	return centralManagmentEngine.Continue();
 }
 
 exile::core::PluginManager& exile::core::Engine::GetPluginManager()

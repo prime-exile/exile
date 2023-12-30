@@ -14,6 +14,7 @@ typedef struct
 	void* memory;
 } exArray;
 
+
 static __forceinline u8 exArrayInit(exArray* arr, u64 preAllocated)
 {
 	arr->allocated = preAllocated;

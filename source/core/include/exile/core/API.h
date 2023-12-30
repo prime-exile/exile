@@ -30,6 +30,8 @@
 #define EX_ERROR EX_FALSE
 #define EX_SUCCESS EX_TRUE
 
+#define EX_BUILD_DATETIME ""__DATE__"@"__TIME__""
+
 #include <stdint.h>
 
 typedef uint8_t u8;

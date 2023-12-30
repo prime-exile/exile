@@ -6,7 +6,6 @@ add_compile_definitions(EXILE_WIN)
 
 option(ENABLE_EXILE_WIN_LONG_PATH "enable windows long path(see in docs)" OFF)
 
-
 if(MSVC)
 	add_compile_definitions(EXILE_MSVC)
 endif(MSVC)

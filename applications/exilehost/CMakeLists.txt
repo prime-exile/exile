@@ -4,7 +4,11 @@ project("exilehost")
 
 add_executable(exilehost "source/main.cpp")
 
+if(WIN32)
 target_link_libraries(exilehost PUBLIC exile.core dbghelp)
+else()
+target_link_libraries(exilehost PUBLIC exile.core)
+endif()
 
 add_custom_command(
         TARGET exilehost POST_BUILD

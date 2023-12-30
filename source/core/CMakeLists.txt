@@ -35,6 +35,7 @@ else()
 	set(EX_DYN_PATH OFF)
 endif()
 
+add_compile_definitions(EX_VERSION_STRING="exp:0.0.1")
 
 add_library(exile.core SHARED)
 add_subdirectory("source")

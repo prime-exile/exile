@@ -3,6 +3,10 @@
 
 #include <exile/core/containers/string.hpp>
 #include <exile/core/API.h>
+extern "C"
+{
+#include <exile/core/version.h>
+}
 
 namespace exile
 {
@@ -28,7 +32,7 @@ namespace exile
 
 		public:
 
-			virtual u8 operator()(exile::core::PluginManager* manager, const exile::String& entry, exile::core::PluginId id)
+			virtual u8 operator()(exile::core::PluginManager* manager, const exile::String& entry, const exVersion& version, exile::core::PluginId id)
 			{
 				return 0;
 			}
@@ -38,13 +42,12 @@ namespace exile
 
 			}
 
-
 			inline void RegisterType(u8 type)
 			{
 				this->type = type;
 			}
 
-			const u8 SupportedPluginType() const
+			inline const u8 SupportedPluginType() const
 			{
 				return type;
 			}

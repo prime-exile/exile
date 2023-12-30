@@ -1,3 +1,4 @@
+#define EXILE_PRIVATE
 #include <exile/core/pluginManager.hpp>
 #include <algorithm>
 

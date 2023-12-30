@@ -1,4 +1,4 @@
-
+#define EXILE_PRIVATE
 #include <exile/core/critical.h>
 #include <exile/core/module.h>
 

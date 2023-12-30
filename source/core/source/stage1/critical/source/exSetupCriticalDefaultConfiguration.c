@@ -12,7 +12,7 @@
 
 extern exNativeModule mdl;
 
-static void exDefaultPanic(const char* message, const char* filename, const u64 line, const char* function, ...)
+static u8 exDefaultPanic(const char* message, const char* filename, const u64 line, const char* function, ...)
 {
 	va_list args;
 	va_start(args, function);
@@ -46,7 +46,8 @@ static void exDefaultPanic(const char* message, const char* filename, const u64 
 
 		exFree(buffer);
 	}
-
+	
+	return EX_TRUE;
 }
 
 EXILE_API_EXPORT

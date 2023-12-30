@@ -1,3 +1,4 @@
+#define EXILE_PRIVATE
 #include <exile/ll/ini/iniInterpretator.hpp>
 #include <exile/core/containers/sstream.hpp>
 #define ContaintsKey(map, k)(map.find(k) != map.end())

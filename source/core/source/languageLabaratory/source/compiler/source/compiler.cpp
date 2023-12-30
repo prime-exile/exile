@@ -1,3 +1,4 @@
+#define EXILE_PRIVATE
 #include <exile/ll/compiler.hpp>
 
 exile::ll::Compiler::Compiler(CompilerStateMachine& machine)

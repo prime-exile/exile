@@ -1,6 +1,12 @@
 #define EXILE_PRIVATE
 #include <exile/core/pluginManager.hpp>
 #include <exile/core/fs/Path.hpp>
+
+extern "C"
+{
+#include <exile/core/version.h>
+}
+
 #include <exile/core/assert.h>
 
 #include <exile/core/u64ToString.hpp>
@@ -45,6 +51,11 @@ exile::core::PluginLoaderId exile::core::PluginManager::AddPluginLoader(exile::c
 	loader->RegisterType(loaders.size());
 	loaders.push_back(loader);
 	return EX_SUCCESS;
+}
+
+void exile::core::PluginManager::RemovePluginLoader(PluginLoaderId id)
+{
+	loaders[id] = NULL;
 }
 
 exile::core::IPluginLoader* exile::core::PluginManager::GetPluginLoader(const PluginLoaderId id)
@@ -134,9 +145,15 @@ u8 exile::core::PluginManager::LoadPlugin(const exile::String& directory)
 	const exile::String pluginEntry = pluginConfig.GetValue("entry");
 	exile::String fullPluginEntry = directory + "/";
 	fullPluginEntry += pluginEntry;
-
-
-	EX_s1AssertFR((*loader)(this, fullPluginEntry, plugins.size()) != EX_SUCCESS, {}, EX_ERROR, "failed to load plugin entry for %s", directory.c_str());
+	
+	exVersion pluginVersion{};
+	if(pluginConfig.Containts("version"))
+	{
+		const exile::String pluginVersionStr = pluginConfig.GetValue("version");
+		EX_s1AssertFR(exVersionParse(&pluginVersion, pluginVersionStr.c_str()) != EX_SUCCESS, {}, EX_ERROR, "failed to parse version string %s", pluginVersionStr.c_str());
+	}
+	
+	EX_s1AssertFR((*loader)(this, fullPluginEntry, pluginVersion, plugins.size()) != EX_SUCCESS, {}, EX_ERROR, "failed to load plugin entry for %s", directory.c_str());
 
 	return EX_SUCCESS;
 }

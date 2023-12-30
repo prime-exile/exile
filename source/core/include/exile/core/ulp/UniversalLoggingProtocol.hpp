@@ -21,8 +21,8 @@ namespace exile
 
 		const LogId& GetCoreId() const;
 
-		void Log(u64 sourceId, exile::LogLevel Level, const exile::String& desc);
-		void Log(u64 sourceId, exile::LogLevel Level, const char* desc, ...);
+		void Log(LogId sourceId, exile::LogLevel Level, const exile::String& desc);
+		void Log(LogId sourceId, exile::LogLevel Level, const char* desc, ...);
 
 		u8 RegisterSource(const LogSource& source);
 		u8 RegisterSource(const LogSource& source, LogId& sourceId);

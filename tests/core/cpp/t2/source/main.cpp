@@ -9,6 +9,7 @@
 #include <exile/core/fs/File.hpp>
 #include <exile/core/fs/DirectoryIterator.hpp>
 #include <exile/core/instance.hpp>
+#include <exile/core/cme/instance.hpp>
 
 #include <iostream>
 #include <exile/core/containers/sstream.hpp>
@@ -67,7 +68,9 @@ int main()
 
 		u8 res = engine.GetPluginManager().LoadPlugin("exDefaultULP");
 
-		engine.GetULP().Log(engine.GetULP().GetCoreId(), exile::LogLevel::Info, "hello %s help %s ! miea", "strrep", "me");
+		engine.GoToCMEPanic("hello");
+
+		//engine.GetULP().Log(engine.GetULP().GetCoreId(), exile::LogLevel::Info, "hello %s help %s ! miea", "strrep", "me");
 
 
 		engine.GetPluginManager().UnloadPlugins();

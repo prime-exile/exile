@@ -7,7 +7,7 @@
 #include <exile/core/API.h>
 #include <exile/core/module.h>
 
-typedef void(*PFNexPanic)(const char* message, const char* filename, const u64 line, const char* function, ...);
+typedef u8(*PFNexPanic)(const char* message, const char* filename, const u64 line, const char* function, ...);
 
 typedef struct
 {

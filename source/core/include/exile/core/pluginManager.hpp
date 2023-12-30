@@ -54,8 +54,9 @@ namespace exile
 
 			u8 AddPlugin(exile::core::IPlugin* plugin);
 			u8 AddPlugin(exile::core::IPlugin* plugin, PluginId& id);
-			PluginLoaderId AddPluginLoader(exile::core::IPluginLoader* loader);
 
+			PluginLoaderId AddPluginLoader(exile::core::IPluginLoader* loader);
+			void RemovePluginLoader(PluginLoaderId id);
 			exile::core::IPluginLoader* GetPluginLoader(const PluginLoaderId id);
 			exile::core::IPlugin* GetPluginByName(const exile::String& name);
 			PluginId GetPluginIdByName(const exile::String& name);
