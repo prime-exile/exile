@@ -13,6 +13,6 @@ typedef u32(*PFNExThreadStart)(void* data);
 
 EX_API u8 exThreadCreate(exThread* thread, PFNExThreadStart threadStart, void* params, u8 detach);
 
-EX_API u
+EX_API u8 exThreadDestroy(exThread* thread);
 
 #endif

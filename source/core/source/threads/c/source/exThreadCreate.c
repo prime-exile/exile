@@ -68,6 +68,7 @@ u8 exThreadCreate(exThread* thread, PFNExThreadStart threadStart, void* params, 
     }
     else
     {
+
         thread->internalData = thread->threadId;
     }
 
