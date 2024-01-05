@@ -31,6 +31,7 @@ namespace exile
 
 			exile::UniversalLoggingProtocol& GetULP();
 			exile::core::PluginManager& GetPluginManager();
+			exile::cme::CentralManagmentEngine& GetCME();
 
 			u8 GoToCMEPanic(const char* message);
 

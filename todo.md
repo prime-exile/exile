@@ -56,9 +56,12 @@
 - [X] - CME AS A PART OF Core! we can control CME using core
 - [X] - CME Panic handler 
 - [X] - make panic bool is we want to continue not execute code in assert
-- [ ] - multithreading
+- [X] - multithreading in C
+- [ ] - CME collect stacktrace in pre proccess assert! + add/rename asserts(like debug assert for non null check) and fix all asserts to do
+- [ ] - CME get thread id in error report
 - [ ] - CME Critical managment engine
 - [ ] - compiler error output!
+- [ ] - multithreading in C++
 - [ ] - error handling in interpretator
 - [ ] - fix file names
 - [ ] - fix to do file

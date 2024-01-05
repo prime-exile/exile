@@ -64,6 +64,11 @@ exile::UniversalLoggingProtocol& exile::core::Engine::GetULP()
 	return ulp;
 }
 
+exile::cme::CentralManagmentEngine& exile::core::Engine::GetCME()
+{
+	return centralManagmentEngine;
+}
+
 u8 exile::core::Engine::GoToCMEPanic(const char* message)
 {
 	centralManagmentEngine.SetPanicMessage(message);

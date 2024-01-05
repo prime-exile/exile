@@ -36,6 +36,16 @@ u8 exile::cme::CentralManagmentEngine::Continue()
 	return continueExection;
 }
 
+void exile::cme::CentralManagmentEngine::InstallStackTrace(const exile::Vector<exile::String>& stacktrace)
+{
+	this->stacktrace = stacktrace;
+}
+
+void exile::cme::CentralManagmentEngine::InstallStackTrace(const char** const stacktrace, u64 size)
+{
+	this->stacktrace = std::move(exile::Vector<exile::String>(stacktrace, stacktrace+size));
+}
+
 exile::cme::CommandExecutionEngine& exile::cme::CentralManagmentEngine::GetCommandEngine()
 {
 	return cmdEngine;

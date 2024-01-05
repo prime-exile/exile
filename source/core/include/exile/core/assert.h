@@ -3,6 +3,7 @@
 
 #include <exile/core/critical.h>
 
+
 #define EX_s1FatalAssert(pred, code, msg)\
 	if(pred) {\
 		code\

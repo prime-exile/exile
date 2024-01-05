@@ -16,6 +16,8 @@ namespace exile
 
 			IShell* currentShell;
 			u8 continueExection;
+
+			exile::Vector<exile::String> stacktrace;
 		public:
 
 			CentralManagmentEngine();
@@ -28,6 +30,9 @@ namespace exile
 
 			void SetContinueExectionState(u8 state);
 			u8 Continue();
+
+			void InstallStackTrace(const exile::Vector<exile::String>& stacktrace);
+			void InstallStackTrace(const char** const stacktrace, u64 size);
 
 			~CentralManagmentEngine();
 		};
