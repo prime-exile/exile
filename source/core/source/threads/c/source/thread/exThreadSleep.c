@@ -24,6 +24,6 @@ void exThreadSleep(u64 ms)
     usleep((ms % 1000) * 1000);
 #endif
 #elif defined(EXILE_WIN)
-	Sleep(ms)
+    Sleep(ms);
 #endif
 }

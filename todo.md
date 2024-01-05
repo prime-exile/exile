@@ -57,7 +57,9 @@
 - [X] - CME Panic handler 
 - [X] - make panic bool is we want to continue not execute code in assert
 - [X] - multithreading in C
-- [ ] - CME collect stacktrace in pre proccess assert! + add/rename asserts(like debug assert for non null check) and fix all asserts to do
+- [X] - CME collect stacktrace in pre proccess assert!
+- [ ] -  add/rename asserts(like debug assert for non null check)
+- [ ] - fix all asserts to do
 - [ ] - CME get thread id in error report
 - [ ] - CME Critical managment engine
 - [ ] - compiler error output!

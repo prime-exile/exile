@@ -14,7 +14,7 @@ EXILE_API_EXPORT
 u8 exMutexUnlock(exMutex* mutex)
 {
 #if defined(EXILE_UNIX)
-	int result = pthread_mutex_unlock((pthread_mutex_t*)mutex->internal_data);
+	int result = pthread_mutex_unlock((pthread_mutex_t*)mutex->internalData);
 	EX_s1AssertR(result != 0, {}, EX_ERROR, "failed to unlock mutex");
 
 	/*

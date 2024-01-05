@@ -3,7 +3,7 @@
 
 #include <cstdio>
 #include <algorithm> 
-#include <stdarg.h>
+#include <cstdarg>
 
 static __forceinline u8 contains(const exile::Vector<exile::LogSource>& vec, const exile::String& name)
 {
@@ -86,6 +86,7 @@ void exile::UniversalLoggingProtocol::Log(LogId sourceId, exile::LogLevel l, con
 	if (formatedMessageSize + 1 < 1024)
 	{
 		char buffer[1024];
+		va_start(args, desc);
 		vsnprintf(buffer, formatedMessageSize + 1, desc, args);
 		const exile::LogSource& src = sources[sourceId];
 

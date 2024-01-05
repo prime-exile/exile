@@ -19,5 +19,5 @@ EX_API void exThreadCancel(exThread* thread);
 
 EX_API u64 exThreadGetCurrentId();
 
-EX_API void exThreadSleep(exThread* thread, u64 ms);
+EX_API void exThreadSleep(u64 ms);
 #endif

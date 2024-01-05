@@ -5,7 +5,7 @@
 extern "C"
 {
 #include <exile/core/cme/cme.h>
-
+	
 
 	EXILE_API_EXPORT void exCMEInstallPanicMessage(const char* msg)
 	{
@@ -29,6 +29,16 @@ extern "C"
 
 	EXILE_API_EXPORT void exCMEInstallStackTrace(const char** const entry, u64 size)
 	{
-		return exile::core::Engine::Get().GetCME().InstallStackTrace(entry, size);
+		exile::core::Engine::Get().GetCME().InstallStackTrace(entry, size);
+	}
+
+	EXILE_API_EXPORT void exCMEAddStackTrace(const char* entry)
+	{
+		exile::core::Engine::Get().GetCME().AddStackTraceEntry(entry);
+	}
+
+	EXILE_API_EXPORT void exCMEStackTraceReserve(u32 count)
+	{
+		exile::core::Engine::Get().GetCME().StackTraceReserve(count);
 	}
 }

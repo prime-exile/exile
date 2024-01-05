@@ -1,12 +1,15 @@
 #include <exception>
 #include <exile/core/critical.hpp>
 #include <exile/core/instance.hpp>
+#include <exile/core/cme/panic.hpp>
 
 #include <iostream>
 
 #if defined(EXILE_WIN)
 #include<Windows.h>
 #include<dbghelp.h>
+
+
 
 void printStackTrace() {
     // Initialize symbol handling
@@ -83,7 +86,6 @@ void printStackTrace() {
 #include <execinfo.h>
 
 
-
 void printStackTrace() {
 	void* stackTrace[10];
 	int stackSize = backtrace(stackTrace, 10);
@@ -132,7 +134,7 @@ void PrintVersion(const exVersion* version)
 
 void test()
 {
-    printStackTrace();
+    exCMEFatalAssert(true, {}, "hello");
 }
 
 int main()
@@ -141,8 +143,14 @@ int main()
 	{
         puts(EX_BUILD_DATETIME);
         exSetupCriticalDefaultConfiguration();
+
 		exile::core::Engine& engine = exile::core::Engine::Get();
-		engine.GetPluginManager().LoadPlugin("exDefaultULP");
+        exile::cme::InstallPanicHandler();
+        
+        engine.GetPluginManager().LoadPlugin("exDefaultULP");
+
+        test();
+
         exile::core::IPlugin* plugin = engine.GetPluginManager().GetPluginByName("exDefaultULP");
         PrintVersion(&plugin->GetVersion());
 

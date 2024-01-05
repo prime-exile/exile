@@ -31,8 +31,14 @@ namespace exile
 			void SetContinueExectionState(u8 state);
 			u8 Continue();
 
+			const exile::Vector<exile::String>& GetStacktrace();
+			const exile::String& GetPanicMessage();
+
 			void InstallStackTrace(const exile::Vector<exile::String>& stacktrace);
 			void InstallStackTrace(const char** const stacktrace, u64 size);
+
+			void AddStackTraceEntry(const exile::String& entry);
+			void StackTraceReserve(u32 count);
 
 			~CentralManagmentEngine();
 		};

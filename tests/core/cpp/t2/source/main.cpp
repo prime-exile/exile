@@ -61,7 +61,6 @@ int main()
 {
 	try
 	{
-
 		exSetupCriticalDefaultConfiguration();
 
 		auto& engine = exile::core::Engine::Get();

@@ -161,7 +161,7 @@ u8 exLoadCriticalConfiguration(const char* file)
 
 	fclose(f);
 
-	EX_s1AssertFR(exSetupCriticalConfigurationFromModule(conf.filename, conf.function) == NULL, {}, EX_ERROR, "failed to load configuration from file %s", file);
+	EX_s1AssertFR(exSetupCriticalConfigurationFromModule(conf.filename, conf.function) == EX_ERROR, {}, EX_ERROR, "failed to load configuration from file %s", file);
 	
 	return EX_SUCCESS;
 }
