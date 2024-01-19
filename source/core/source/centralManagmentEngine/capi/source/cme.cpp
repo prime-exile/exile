@@ -9,36 +9,41 @@ extern "C"
 
 	EXILE_API_EXPORT void exCMEInstallPanicMessage(const char* msg)
 	{
-		exile::core::Engine::Get().GetCME().SetPanicMessage(msg);
+		exGEngine.GetCME().SetPanicMessage(msg);
 	}
 
 	EXILE_API_EXPORT void exCMERunShell()
 	{
-		exile::core::Engine::Get().GetCME().RunShell();
+		exGEngine.GetCME().RunShell();
 	}
 
 	EXILE_API_EXPORT void exCMESetContinueExectionState(u8 state)
 	{
-		exile::core::Engine::Get().GetCME().SetContinueExectionState(state);
+		exGEngine.GetCME().SetContinueExectionState(state);
 	}
 	
 	EXILE_API_EXPORT u8 exCMEContinue()
 	{
-		return exile::core::Engine::Get().GetCME().Continue();
+		return exGEngine.GetCME().Continue();
 	}
 
 	EXILE_API_EXPORT void exCMEInstallStackTrace(const char** const entry, u64 size)
 	{
-		exile::core::Engine::Get().GetCME().InstallStackTrace(entry, size);
+		exGEngine.GetCME().InstallStackTrace(entry, size);
 	}
 
 	EXILE_API_EXPORT void exCMEAddStackTrace(const char* entry)
 	{
-		exile::core::Engine::Get().GetCME().AddStackTraceEntry(entry);
+		exGEngine.GetCME().AddStackTraceEntry(entry);
+	}
+
+	EXILE_API_EXPORT void exCMESetThreadId(u64 id)
+	{
+		exGEngine.GetCME().SetThreadId(id);
 	}
 
 	EXILE_API_EXPORT void exCMEStackTraceReserve(u32 count)
 	{
-		exile::core::Engine::Get().GetCME().StackTraceReserve(count);
+		exGEngine.GetCME().StackTraceReserve(count);
 	}
 }

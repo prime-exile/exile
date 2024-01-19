@@ -16,4 +16,6 @@ EX_API void exCMEInstallStackTrace(const char** const entry, u64 size);
 EX_API void exCMEAddStackTrace(const char* entry);
 EX_API void exCMEStackTraceReserve(u32 count);
 
+EX_API void exCMESetThreadId(u64 id);
+
 #endif

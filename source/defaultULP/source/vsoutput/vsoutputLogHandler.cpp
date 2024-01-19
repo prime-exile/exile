@@ -7,7 +7,7 @@ static __forceinline u8 DebugOutput(const char* desc, ...)
 
 	int formatedMessageSize = vsnprintf(NULL, 0, desc, list);
 	char* buffer = exile::memory::AllocRaw<char>(formatedMessageSize + 1);
-	EX_s1AssertF(buffer == NULL, { va_end(list); }, EX_ERROR, "buffer == NULL");
+	exAssertR(buffer == NULL, { va_end(list); }, EX_ERROR, "buffer == NULL");
 	vsnprintf(buffer, formatedMessageSize, desc, list);
 
 	buffer[formatedMessageSize] = '\0';
@@ -23,9 +23,10 @@ static __forceinline u8 DebugOutput(const char* desc, ...)
 
 const u64 exile::VSOutLogHandler::Handle(exile::UniversalLoggingProtocol* proto, const exile::String& message, const exile::LogSource& source, exile::LogLevel level)
 {
-	EX_s1AssertF(
-		DebugOutput("[%s][%s]: %s\r\n", exile::LogLevelToString(level), source.GetName().c_str(), message.c_str()) == EX_SUCCESS
-		, {}, EX_ERROR, "buffer == NULL");
+	register u8 res = DebugOutput("[%s][%s]: %s\r\n", exile::LogLevelToString(level), source.GetName().c_str(), message.c_str());
+
+	exAssertR(
+		res != EX_SUCCESS, {}, EX_ERROR, "buffer == NULL");
 	return EX_SUCCESS;
 }
 

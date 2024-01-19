@@ -34,7 +34,7 @@ namespace exile
 		public:
 			IniInterpretator();
 
-			void Interpretate(const exile::ll::IniInstruction& instruction);
+			u8 Interpretate(const exile::ll::IniInstruction& instruction);
 
 			void AddSection(const exile::String& name,const exile::ll::IniInterpretatorSection& newSection);
 			const exile::ll::IniInterpretatorSection& GetSection(const exile::String& name) const;

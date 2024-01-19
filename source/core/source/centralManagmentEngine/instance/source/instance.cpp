@@ -3,14 +3,17 @@
 
 #include "commands/echo.hpp"
 #include "commands/exit.hpp"
+#include "commands/setv.hpp"
 
 exile::cme::CmdEcho cmdEcho;
 exile::cme::CmdExit cmdExit;
+exile::cme::CmdSetV cmdSetV;
 
 exile::cme::CentralManagmentEngine::CentralManagmentEngine()
 {
 	cmdEngine.RegisterCommand("echo", &cmdEcho);
 	cmdEngine.RegisterCommand("exit", &cmdExit);
+	cmdEngine.RegisterCommand("setV", &cmdSetV);
 }
 
 void exile::cme::CentralManagmentEngine::SetupShell(IShell* currentShell)
@@ -67,6 +70,16 @@ void exile::cme::CentralManagmentEngine::AddStackTraceEntry(const exile::String&
 void exile::cme::CentralManagmentEngine::StackTraceReserve(u32 count)
 {
 	stacktrace.reserve(count);
+}
+
+void exile::cme::CentralManagmentEngine::SetThreadId(u64 id)
+{
+	threadId = id;
+}
+
+u64 exile::cme::CentralManagmentEngine::GetThreadId()
+{
+	return threadId;
 }
 
 exile::cme::CommandExecutionEngine& exile::cme::CentralManagmentEngine::GetCommandEngine()

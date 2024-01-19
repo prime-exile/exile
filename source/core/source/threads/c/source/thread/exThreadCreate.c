@@ -14,9 +14,9 @@ u8 exThreadCreate(exThread* thread, PFNExThreadStart threadStart, void* params, 
 {
 #if defined(EXILE_WIN)
 
-	thread->internalData = CreateThread(NULL, NULL, threadStart, params, NULL, (DWORD*)&thread->threadId);
+	thread->internalData = CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)threadStart, params, NULL, (DWORD*)&thread->threadId);
 
-	EX_s1AssertR(thread->internalData == NULL, {}, EX_ERROR, "CreateThread: failed to create thread");
+    exAssertR(thread->internalData == NULL, {}, EX_ERROR, "CreateThread: failed to create thread");
 
 	if (detach)
 	{
@@ -25,50 +25,41 @@ u8 exThreadCreate(exThread* thread, PFNExThreadStart threadStart, void* params, 
 
 #elif defined(EXILE_UNIX)
 
-	/*
-	* to do:
-	        switch (result) {
-            case EAGAIN:
-                ERROR("Failed to create thread: insufficient resources to create another thread.");
-                return false;
-            case EINVAL:
-                ERROR("Failed to create thread: invalid settings were passed in attributes..");
-                return false;
-            default:
-                ERROR("Failed to create thread: an unhandled error has occurred. errno=%i", result);
-                return false;
-        }
-	*/
 
     int status = pthread_create((pthread_t*)&thread->threadId, NULL, threadStart, params);
-	EX_s1AssertR(status != 0, {
-	}, EX_ERROR, "pthread_create:failed to create thread");
-
-	/*
-	        if (result != 0) {
-            switch (result) {
-                case EINVAL:
-                    KERROR("Failed to detach newly-created thread: thread is not a joinable thread.");
-                    return false;
-                case ESRCH:
-                    KERROR("Failed to detach newly-created thread: no thread with the id %#x could be found.", out_thread->thread_id);
-                    return false;
-                default:
-                    KERROR("Failed to detach newly-created thread: an unknown error has occurred. errno=%i", result);
-                    return false;
-            }
+    if (status != 0)
+    {
+        switch (status)
+        {
+        case EAGAIN:
+            exAssertR(1, {}, EX_ERROR, "pthread_create: Failed to create thread: insufficient resources to create another thread.");
+        case EINVAL:
+            exAssertR(1, {}, EX_ERROR, "pthread_create: Failed to create thread: invalid settings were passed in attributes..");
+        default: 
+            exAssertFR(1, {}, EX_ERROR, "pthread_create: Failed to create thread: an unhandled error has occurred. errno=%i", status);
         }
-	*/
+    }
 
     if (detach)
     {
         status = pthread_detach(thread->threadId);
+        if (status != 0)
+        {
+            switch (status)
+            {
+            case ESRCH:
+                exAssertFR(1, {}, EX_ERROR, "pthread_detach: Failed to detach newly-created thread: no thread with the id %#x could be found.", thread->threadId);
+            case EINVAL:
+                exAssertR(1, {}, EX_ERROR, "pthread_detach: Failed to detach newly-created thread: invalid settings were passed in attributes..");
+            default:
+                exAssertFR(1, {}, EX_ERROR, "pthread_detach: Failed to detach newly-created thread: an unhandled error has occurred. errno=%i", status);
+            }
+        }
         EX_s1AssertR(status != 0, {
         }, EX_ERROR, "pthread_detach:failed to detach");
     }
     else
     {
-
         thread->internalData = thread->threadId;
     }
 

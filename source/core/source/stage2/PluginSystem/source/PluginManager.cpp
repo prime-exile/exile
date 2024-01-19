@@ -117,7 +117,7 @@ u8 exile::core::PluginManager::LoadPlugin(const exile::String& directory)
 	exile::ll::IniParser ini;
 	ConfigureIniParser(ini);
 
-	EX_s1AssertFR(ini.ParseFromFile(configurationFilePath) != EX_SUCCESS, {}, EX_ERROR, "failed to parse ini file %s", configurationFilePath.Str().c_str());
+	exAssertFR(ini.ParseFromFile(configurationFilePath) != EX_SUCCESS, {}, EX_ERROR, "failed to parse ini file %s", configurationFilePath.Str().c_str());
 
 	/* ini file example for plugin
 		[exile]
@@ -133,7 +133,7 @@ u8 exile::core::PluginManager::LoadPlugin(const exile::String& directory)
 	u8 typeId = atoi(pluginType.c_str());
 
 	exile::core::IPluginLoader* loader = GetPluginLoader(typeId);
-	EX_s1AssertFR(loader == NULL, {}, EX_ERROR, "unregistered loader id: %i for plugin %s", typeId, directory.c_str());
+	exAssertFR(loader == NULL, {}, EX_ERROR, "unregistered loader id: %i for plugin %s", typeId, directory.c_str());
 	//if (loader == NULL)
 	//{
 	//	/*
@@ -150,10 +150,10 @@ u8 exile::core::PluginManager::LoadPlugin(const exile::String& directory)
 	if(pluginConfig.Containts("version"))
 	{
 		const exile::String pluginVersionStr = pluginConfig.GetValue("version");
-		EX_s1AssertFR(exVersionParse(&pluginVersion, pluginVersionStr.c_str()) != EX_SUCCESS, {}, EX_ERROR, "failed to parse version string %s", pluginVersionStr.c_str());
+		exAssertFR(exVersionParse(&pluginVersion, pluginVersionStr.c_str()) != EX_SUCCESS, {}, EX_ERROR, "failed to parse version string %s", pluginVersionStr.c_str());
 	}
 	
-	EX_s1AssertFR((*loader)(this, fullPluginEntry, pluginVersion, plugins.size()) != EX_SUCCESS, {}, EX_ERROR, "failed to load plugin entry for %s", directory.c_str());
+	exAssertFR((*loader)(this, fullPluginEntry, pluginVersion, plugins.size()) != EX_SUCCESS, {}, EX_ERROR, "failed to load plugin entry for %s", directory.c_str());
 
 	return EX_SUCCESS;
 }
@@ -161,7 +161,7 @@ u8 exile::core::PluginManager::LoadPlugin(const exile::String& directory)
 u8 exile::core::PluginManager::UnloadPlugin(const exile::String& name)
 {
 	PluginId id = GetPluginIdByName(name);
-	EX_s1AssertFR(id == exile::core::PluginIdInvalid, {}, EX_ERROR, "failed to find plugin %s", name.c_str());
+	exAssertFR(id == exile::core::PluginIdInvalid, {}, EX_ERROR, "failed to find plugin %s", name.c_str());
 	return UnloadPlugin(id);
 }
 

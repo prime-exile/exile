@@ -68,8 +68,9 @@ u8 exLoadCriticalConfiguration(const char* file)
 
 	FILE* f = fopen(file, "r");
 
-	EX_s1AssertFR(f == NULL, {}, EX_ERROR, "failed to open file configuration file %s!", file);
-
+	exAssertFR(f == NULL, {
+	}, EX_ERROR, "failed to open file configuration file %s!", file);
+	
 	exCriticalConfiguration conf;
 	exMemset(&conf, 0, sizeof(exCriticalConfiguration));
 
@@ -92,7 +93,11 @@ u8 exLoadCriticalConfiguration(const char* file)
 		}
 		char c = (char)rc;
 
-		EX_s1AssertFR(readerString.occupied >= 512, { fclose(f); }, EX_ERROR, "failed to parse readerString.occupied >= 512 in file %s", file);
+		exAssertFR(readerString.occupied >= 512, 
+			{
+				fclose(f); 
+			}, 
+		EX_ERROR, "failed to parse readerString.occupied >= 512 in file %s", file);
 
 		if (c == '[')
 		{
@@ -161,7 +166,7 @@ u8 exLoadCriticalConfiguration(const char* file)
 
 	fclose(f);
 
-	EX_s1AssertFR(exSetupCriticalConfigurationFromModule(conf.filename, conf.function) == EX_ERROR, {}, EX_ERROR, "failed to load configuration from file %s", file);
+	exAssertFR(exSetupCriticalConfigurationFromModule(conf.filename, conf.function) == EX_ERROR, {}, EX_ERROR, "failed to load configuration from file %s", file);
 	
 	return EX_SUCCESS;
 }

@@ -1,6 +1,5 @@
-
-
 #include <exile/core/memory.hpp>
+#include <exile/core/thread/thread.hpp>
 #include <exile/core/containers/function.hpp>
 #include <exile/core/containers/unordered_map.hpp>
 #include <exile/core/plugin.hpp>
@@ -10,12 +9,15 @@
 #include <exile/core/fs/DirectoryIterator.hpp>
 #include <exile/core/instance.hpp>
 #include <exile/core/cme/instance.hpp>
+#include <exile/core/assertNew.h>
+#include <exile/core/storage.hpp>
 
 #include <iostream>
 #include <exile/core/containers/sstream.hpp>
 
 #include <stdarg.h>
 #include <stdio.h>
+#include <thread>
 
 static __forceinline void SplitString(const exile::String& str, exile::Vector<exile::String>& splitted, char s)
 {
@@ -57,17 +59,74 @@ void PrintDiretory(const exile::String& path)
 	}
 }
 
+void testThread(exThread* th)
+{
+	struct tes2 {
+		int w;
+		int il;
+	} tes;
+	tes.w = 0;
+	tes.il = 2232;
+	exThreadCreate(th, [](void* d)->u32 {
+		tes2* data = (tes2*)d;
+		printf("hello world %i\n\r", data->il);
+		printf("hello world %i\n\r", data->il);
+		printf("hello world %i\n\r", data->il);
+		printf("hello world %i\n\r", data->il);
+		printf("hello world %i\n\r", data->il);
+		printf("hello world %i\n\r", data->il);
+		printf("hello world %i\n\r", data->il);
+		printf("hello world %i\n\r", data->il);
+		printf("hello world %i\n\r", data->il);
+		printf("hello world %i", data->il);
+		printf("hello world %i", data->il);
+		printf("hello world %i", data->il);
+		exThreadSleep(500);
+		return 0;
+	}, &tes, 0);
+}
+
 int main()
 {
+	struct ThreadArguments
+	{
+		u32 il;
+		u32 rb;
+		u32 ih;
+	};
+
 	try
 	{
 		exSetupCriticalDefaultConfiguration();
+		
+		auto& engine = exGEngine;
 
-		auto& engine = exile::core::Engine::Get();
 
 		u8 res = engine.GetPluginManager().LoadPlugin("exDefaultULP");
 
-		engine.GoToCMEPanic("hello");
+		exile::Thread th;
+		ThreadArguments ar;
+
+		exile::Function<u32(ThreadArguments*)> f = [](ThreadArguments* args)->u32 {
+			printf("hello world %i %i %i\n\r", args->ih, args->il, args->rb);
+			exThreadSleep(100);
+			printf("hello world %i %i %i\n\r", args->ih, args->il, args->rb);
+			return 0;
+			};
+
+		ar.ih = 1;
+		ar.il = 2;
+		ar.rb = 532;
+		th.Run<ThreadArguments>(f, &ar);
+		printf("jelolasdasdlasdlas';d");
+		exThreadSleep(100);
+
+		th.Join();
+
+
+		//f(&ar);
+		//th.Run([]()->u32 {
+		//});
 
 		//engine.GetULP().Log(engine.GetULP().GetCoreId(), exile::LogLevel::Info, "hello %s help %s ! miea", "strrep", "me");
 

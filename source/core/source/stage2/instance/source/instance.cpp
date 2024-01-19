@@ -3,12 +3,7 @@
 #include <exile/core/fs/DirectoryIterator.hpp>
 
 
-exile::core::Engine exile::core::Engine::instance;
-
-exile::core::Engine& exile::core::Engine::Get()
-{
-	return instance;
-}
+exile::core::Engine exGEngine;
 
 u8 exile::core::Engine::LoadAllPluginsFromFolder(const exile::String& folder)
 {
@@ -22,7 +17,7 @@ u8 exile::core::Engine::LoadAllPluginsFromFolder(const exile::String& folder)
 			if (it.IsDirectory()) 
 			{
 				const exile::String dir = (folder + "/") + currentName;
-				EX_s1AssertFR(pluginManager.LoadPlugin(dir) == EX_SUCCESS, {}, EX_ERROR, "failed to load plugin from directory %s", folder.c_str());
+				exAssertFR(pluginManager.LoadPlugin(dir) == EX_SUCCESS, {}, EX_ERROR, "failed to load plugin from directory %s", folder.c_str());
 			}
 		}
 		++it;
@@ -43,7 +38,7 @@ u8 exile::core::Engine::LoadAllPluginsFromFolder(const exile::core::Path& folder
 			if (it.IsDirectory())
 			{
 				const exile::String dir = (folder.Str() + "/") + currentName;
-				EX_s1AssertFR(pluginManager.LoadPlugin(dir) == EX_SUCCESS, {}, EX_ERROR, "failed to load plugin from directory %s", folder.CStr());
+				exAssertFR(pluginManager.LoadPlugin(dir) == EX_SUCCESS, {}, EX_ERROR, "failed to load plugin from directory %s", folder.CStr());
 			}
 		}
 		++it;
@@ -64,6 +59,11 @@ exile::UniversalLoggingProtocol& exile::core::Engine::GetULP()
 	return ulp;
 }
 
+exile::core::EnvironmentStorage& exile::core::Engine::GetEnv()
+{
+	return env;
+}
+
 exile::cme::CentralManagmentEngine& exile::core::Engine::GetCME()
 {
 	return centralManagmentEngine;
@@ -75,6 +75,12 @@ u8 exile::core::Engine::GoToCMEPanic(const char* message)
 	centralManagmentEngine.RunShell();
 	return centralManagmentEngine.Continue();
 }
+
+u8 exile::core::Engine::Exec(const exile::String& command)
+{
+	return centralManagmentEngine.GetCommandEngine().Execute(command);
+}
+
 
 exile::core::PluginManager& exile::core::Engine::GetPluginManager()
 {

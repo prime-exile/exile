@@ -15,7 +15,7 @@ u8 exMutexUnlock(exMutex* mutex)
 {
 #if defined(EXILE_UNIX)
 	int result = pthread_mutex_unlock((pthread_mutex_t*)mutex->internalData);
-	EX_s1AssertR(result != 0, {}, EX_ERROR, "failed to unlock mutex");
+	exAssertR(result != 0, {}, EX_ERROR, "failed to unlock mutex");
 
 	/*
 	* TO DO
@@ -32,7 +32,7 @@ u8 exMutexUnlock(exMutex* mutex)
 #elif defined(EXILE_WIN)
 	int result = ReleaseMutex(mutex);
 
-	EX_s1AssertR(result == 0, {}, EX_ERROR, "failed to unlock mutex")
+	exAssertR(result == 0, {}, EX_ERROR, "failed to unlock mutex")
 
 #endif
 	return EX_SUCCESS;

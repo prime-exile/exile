@@ -44,3 +44,7 @@ target_include_directories(exile.core PUBLIC "include/")
 target_include_directories(exile.core PRIVATE "private/include/")
 message("EXILE_NASM_OBJ_FORMAT = ${EXILE_NASM_OBJ_FORMAT}")
 set_target_properties(exile.core PROPERTIES NASM_OBJ_FORMAT ${EXILE_NASM_OBJ_FORMAT})
+
+if(WIN32)
+target_link_libraries(exile.core PUBLIC dbghelp)
+endif(WIN32)

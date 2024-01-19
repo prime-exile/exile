@@ -18,7 +18,7 @@ namespace exile
 		inline T* Alloc(const Args& ... args)
 		{
 			T* ptr = reinterpret_cast<T*>(exMalloc(sizeof(T)));
-			EX_s1FatalAssertF(ptr == NULL, {}, "failed to allocated %ll bytes for class %s", sizeof(T), typeid(T).name());
+			exAssertFatalF(ptr == NULL, {}, "failed to allocated %ll bytes for class %s", sizeof(T), typeid(T).name())
 			return new (ptr) T(args...);
 		}
 
@@ -26,7 +26,7 @@ namespace exile
 		inline T* Alloc()
 		{
 			T* ptr = reinterpret_cast<T*>(exMalloc(sizeof(T)));
-			EX_s1FatalAssertF(ptr == NULL, {}, "failed to allocated %ll bytes for class %s", sizeof(T), typeid(T).name());
+			exAssertFatalF(ptr == NULL, {}, "failed to allocated %ll bytes for class %s", sizeof(T), typeid(T).name())
 			return new (ptr) T();
 		}
 
@@ -39,7 +39,7 @@ namespace exile
 		template<class T>
 		inline void Free(T* address)
 		{
-			EX_s1FatalAssertF(address == NULL, {}, "failed to free class %s address == NULL", typeid(T).name());
+			exAssertFatalF(address == NULL, {}, "failed to free class %s address == NULL", typeid(T).name());
 			address->~T();
 			exFree(address);
 		}
@@ -47,7 +47,7 @@ namespace exile
 
 		inline void Free(void* address)
 		{
-			EX_s1FatalAssert(address == NULL, {}, "failed to free class 'void*' address == NULL");
+			exAssertFatal(address == NULL, {}, "failed to free class 'void*' address == NULL");
 			exFree(address);
 		}
 

@@ -9,7 +9,7 @@ EXILE_API_EXPORT u8 exSetupCriticalConfigurationFromModule(const char* path, con
 		exSetupCriticalDefaultConfiguration();
 	}
 
-	EX_s1AssertFR(!exNativeModuleLoad(&mdl, path), {}, EX_ERROR, "failed to load module %s", path);
+	exAssertFR(!exNativeModuleLoad(&mdl, path), {}, EX_ERROR, "failed to load module %s", path);
 
 	void* address = exNativeModuleGetAddress(&mdl, "exCriticalInit");
 
@@ -20,7 +20,7 @@ EXILE_API_EXPORT u8 exSetupCriticalConfigurationFromModule(const char* path, con
 	}
 
 	void* panicHandlder = exNativeModuleGetAddress(&mdl, function);
-	EX_s1AssertFR(panicHandlder == NULL, {
+	exAssertFR(panicHandlder == NULL, {
 		exNativeModuleFree(&mdl);
 	}, EX_ERROR, "failed to get function %s from module %s", function, path);
 

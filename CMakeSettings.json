@@ -40,6 +40,11 @@
           "name": "EXILE_ULP_LOG_DYNAMIC_MODE",
           "value": "True",
           "type": "BOOL"
+        },
+        {
+          "name": "EXILE_BUILD_DEV",
+          "value": "False",
+          "type": "BOOL"
         }
       ]
     },
@@ -60,6 +65,24 @@
           "name": "EXILE_DEFAULT_ULP_STDOUT",
           "value": "True",
           "type": "BOOL"
+        }
+      ]
+    },
+    {
+      "name": "x86-Debug",
+      "generator": "Ninja",
+      "configurationType": "Debug",
+      "buildRoot": "${projectDir}\\out\\build\\${name}",
+      "installRoot": "${projectDir}\\out\\install\\${name}",
+      "cmakeCommandArgs": "",
+      "buildCommandArgs": "",
+      "ctestCommandArgs": "",
+      "inheritEnvironments": [ "msvc_x86" ],
+      "variables": [
+        {
+          "name": "EXILE_ARCH",
+          "value": "x86",
+          "type": "STRING"
         }
       ]
     }

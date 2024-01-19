@@ -26,7 +26,7 @@ const exile::ll::IniInterpretator& exile::ll::IniParser::GetInterpretator() cons
 u8 exile::ll::IniParser::ParseFromFile(const exile::core::Path& path)
 {
 	exile::core::File file;
-	EX_s1AssertFR(file.Open(path, "r") == EX_ERROR, {}, EX_ERROR, "failed to open file %s", path.CStr());
+	exAssertFR(file.Open(path, "r") == EX_ERROR, {}, EX_ERROR, "failed to open file %s", path.CStr());
 	
 	exile::String str;
 	u64 fSize = file.GetSize();
@@ -41,11 +41,11 @@ u8 exile::ll::IniParser::Parse(const exile::String& text)
 {
 	exile::ll::Lexer lexer(lexerStateMachine);
 	lexerStateMachine.Reset();
-	EX_s1AssertFR(lexer.Tokenize(text), {}, EX_ERROR, "failed to tokenize ini file\n%s", text);
+	exAssertFR(lexer.Tokenize(text), {}, EX_ERROR, "failed to tokenize ini file\n%s", text);
 
 	exile::ll::Compiler compiler(compilerStateMachine);
 	compilerStateMachine.Reset();
-	EX_s1AssertFR(compiler.Compile(lexer.GetTokens()), {}, EX_ERROR, "failed to compile ini file\n%s", text);
+	exAssertFR(compiler.Compile(lexer.GetTokens()), {}, EX_ERROR, "failed to compile ini file\n%s", text);
 	for (const exile::ll::IniInstruction& inst : compilerStateMachine.GetInstructions())
 	{
 		interpretator.Interpretate(inst);

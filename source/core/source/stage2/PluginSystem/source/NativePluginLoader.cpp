@@ -68,14 +68,14 @@ u8 exile::core::NativePluginLoader::Load(exile::core::PluginManager* manager, co
 	/*
 	   Load error from system and print!
 	*/
-	EX_s1AssertFR(handle == NULL, {}, EX_ERROR, "LoadLibraryA: failed to load library %s", entry.c_str());
+	exAssertFR(handle == NULL, {}, EX_ERROR, "LoadLibraryA: failed to load library %s", entry.c_str());
 #elif defined(EXILE_UNIX)
 
 	RawPluginHandle handle = dlopen(entry.c_str(), RTLD_LAZY);
 	/*
 	   Load error from system and print!
 	*/
-	EX_s1AssertFR(handle == NULL, {}, EX_ERROR, "dlopen: failed to load library %s, desc: %s", entry.c_str(), dlerror());
+	exAssertFR(handle == NULL, {}, EX_ERROR, "dlopen: failed to load library %s, desc: %s", entry.c_str(), dlerror());
 #endif
 
 	exile::String pluginName = "unnamed";
@@ -91,12 +91,12 @@ u8 exile::core::NativePluginLoader::Load(exile::core::PluginManager* manager, co
 	PFNexPluginInit2 exPluginInit = reinterpret_cast<PFNexPluginInit2>(plugin->GetProcAddress("exPluginInit"));
 	if (exPluginInit != NULL)
 	{
-		EX_s1AssertFR(exPluginInit(plugin, id) != EX_SUCCESS, {
+		exAssertFR(exPluginInit(plugin, id) != EX_SUCCESS, {
 			exile::memory::Free(plugin);
 			}, EX_ERROR, "exPluginInit: failed to initialize plugin %s", entry.c_str());
 	}
 
-	EX_s1AssertFR(manager->AddPlugin(plugin) != EX_SUCCESS, {
+	exAssertFR(manager->AddPlugin(plugin) != EX_SUCCESS, {
 		exile::memory::Free(plugin);
 		}, EX_ERROR, "failed to add plugin %s in manager!", entry.c_str());
 
@@ -110,14 +110,14 @@ u8 exile::core::NativePluginLoader::Load(exile::core::PluginManager* manager, co
 	 /*
 		Load error from system and print!
 	 */
-	 EX_s1AssertFR(handle == NULL, {}, EX_ERROR, "LoadLibraryA: failed to load library %s", entry.c_str());
+	 exAssertFR(handle == NULL, {}, EX_ERROR, "LoadLibraryA: failed to load library %s", entry.c_str());
 #elif defined(EXILE_UNIX)
 
 	RawPluginHandle handle = dlopen(entry.c_str(), RTLD_LAZY);
 	/*
 	   Load error from system and print!
 	*/
-	EX_s1AssertFR(handle != NULL, {}, EX_ERROR, "dlopen: failed to load library %s, desc: %s", entry.c_str(), dlerror());
+	exAssertFR(handle != NULL, {}, EX_ERROR, "dlopen: failed to load library %s, desc: %s", entry.c_str(), dlerror());
 #endif
 
 	exile::String pluginName = "unnamed";
@@ -133,12 +133,12 @@ u8 exile::core::NativePluginLoader::Load(exile::core::PluginManager* manager, co
 	PFNexPluginInit exPluginInit = reinterpret_cast<PFNexPluginInit>(plugin->GetProcAddress("exPluginInit"));
 	if (exPluginInit != NULL)
 	{
-		EX_s1AssertFR(exPluginInit(plugin) != EX_SUCCESS, {
+		exAssertFR(exPluginInit(plugin) != EX_SUCCESS, {
 			exile::memory::Free(plugin); 
 		}, EX_ERROR, "exPluginInit: failed to initialize plugin %s", entry.c_str());
 	}
 	
-	EX_s1AssertFR(manager->AddPlugin(plugin) != EX_SUCCESS, {
+	exAssertFR(manager->AddPlugin(plugin) != EX_SUCCESS, {
 		exile::memory::Free(plugin);
 	}, EX_ERROR, "failed to add plugin %s in manager!", entry.c_str());
 

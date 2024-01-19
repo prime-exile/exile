@@ -17,6 +17,8 @@ namespace exile
 			IShell* currentShell;
 			u8 continueExection;
 
+			u64 threadId;
+
 			exile::Vector<exile::String> stacktrace;
 		public:
 
@@ -39,6 +41,9 @@ namespace exile
 
 			void AddStackTraceEntry(const exile::String& entry);
 			void StackTraceReserve(u32 count);
+
+			void SetThreadId(u64 id);
+			u64 GetThreadId();
 
 			~CentralManagmentEngine();
 		};

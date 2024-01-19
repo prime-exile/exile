@@ -17,7 +17,7 @@ u8 exMutexLock(exMutex* mutex)
 	/*
 		TO DO SWITCH WITH ERROR!
 	*/
-	EX_s1AssertR(result != 0, {}, EX_ERROR, "failed to lock mutex");
+	exAssertR(result != 0, {}, EX_ERROR, "failed to lock mutex");
 #elif defined(EXILE_WIN)
 	DWORD result = WaitForSingleObject(mutex->internalData, INFINITE);
 
@@ -25,7 +25,7 @@ u8 exMutexLock(exMutex* mutex)
 		TO DO SWITCH WITH ERROR!
 	*/
 
-	EX_s1AssertR(result == WAIT_ABANDONED, {}, EX_ERROR, "failed to lock mutex");
+	exAssertR(result == WAIT_ABANDONED, {}, EX_ERROR, "failed to lock mutex");
 #endif
 
 	return EX_SUCCESS;

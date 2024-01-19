@@ -1,6 +1,6 @@
 #define EXILE_PRIVATE
 
-#include<exile/core/cme/commandExecutionEngine.hpp>
+#include <exile/core/cme/commandExecutionEngine.hpp>
 #include <exile/core/containers/sstream.hpp>
 
 #define ContaintsKey(map, k)(map.find(k) != map.end())
@@ -28,7 +28,7 @@ static __forceinline void SplitString(const exile::String& str, exile::Vector<ex
 
 u8 exile::cme::CommandExecutionEngine::RegisterCommand(const exile::String& name, exile::cme::ICommand* command)
 {
-	EX_s1AssertFR(ContaintsKey(commands, name), {}, EX_ERROR, "failed to register command %s, command with this name already exists", name.c_str());
+	exAssertFR(ContaintsKey(commands, name), {}, EX_ERROR, "failed to register command %s, command with this name already exists", name.c_str());
 	
 	commands[name] = command;
 	return EX_SUCCESS;
@@ -49,7 +49,7 @@ u8 exile::cme::CommandExecutionEngine::Execute(const exile::String& command)
 	exile::Vector<exile::String> splittedCommand;
 	SplitString(command, splittedCommand, ' ');
 
-	EX_s1AssertFR((splittedCommand.size() < 1), {}, EX_ERROR, "failed to execute command: %s - command are empty!", command.c_str());
+	exAssertFR((splittedCommand.size() < 1), {}, EX_ERROR, "failed to execute command: %s - command are empty!", command.c_str());
 
 	const exile::String& commandName = splittedCommand[0];
 	exile::Vector<exile::String> args(splittedCommand.begin() + 1, splittedCommand.end());
@@ -59,7 +59,7 @@ u8 exile::cme::CommandExecutionEngine::Execute(const exile::String& command)
 
 u8 exile::cme::CommandExecutionEngine::Execute(const exile::String& commandName, const exile::Vector<exile::String> args)
 {
-	EX_s1AssertFR(!ContaintsKey(commands, commandName), {}, EX_ERROR, "failed to execute command %s", commandName.c_str());
+	exAssertFR(!ContaintsKey(commands, commandName), {}, EX_ERROR, "failed to execute command %s", commandName.c_str());
 
 	exile::cme::ICommand* targetCommand = commands[commandName];
 	return targetCommand->Execute(args);

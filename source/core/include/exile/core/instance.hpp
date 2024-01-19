@@ -6,6 +6,7 @@
 #include <exile/core/nativePlugin.hpp>
 #include <exile/core/cme/instance.hpp>
 #include <exile/core/cme/shellConsole.hpp>
+#include <exile/core/storage.hpp>
 
 namespace exile
 {
@@ -13,30 +14,35 @@ namespace exile
 	{
 		class EX_API Engine
 		{
-			static Engine instance;
-
 			exile::cme::ShellConsole consoleShell;
 			exile::UniversalLoggingProtocol ulp;
 			exile::core::NativePluginLoader nativePluginLoader;
 			exile::core::PluginManager pluginManager;
 			exile::cme::CentralManagmentEngine centralManagmentEngine;
+			exile::core::EnvironmentStorage env;
 		public:
-
-			static Engine& Get();
 
 			Engine();
 
 			u8 LoadAllPluginsFromFolder(const exile::String& folder);
 			u8 LoadAllPluginsFromFolder(const exile::core::Path& folder);
 
+
+			exile::core::EnvironmentStorage& GetEnv();
 			exile::UniversalLoggingProtocol& GetULP();
 			exile::core::PluginManager& GetPluginManager();
 			exile::cme::CentralManagmentEngine& GetCME();
 
 			u8 GoToCMEPanic(const char* message);
 
+			u8 Exec(const exile::String& command);
+
 		};
+
+		
 	}
 }
+
+extern EX_API exile::core::Engine exGEngine;
 
 #endif

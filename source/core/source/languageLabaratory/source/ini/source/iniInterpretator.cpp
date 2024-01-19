@@ -39,7 +39,7 @@ void exile::ll::IniInterpretator::Complete()
 	sections.insert(exile::UnorderedMapPair<exile::String, exile::ll::IniInterpretatorSection>(currentSectionName, currentSection));
 }
 
-void exile::ll::IniInterpretator::Interpretate(const exile::ll::IniInstruction& instruction)
+u8 exile::ll::IniInterpretator::Interpretate(const exile::ll::IniInstruction& instruction)
 {
 
 	switch (instruction.GetId())
@@ -63,34 +63,21 @@ void exile::ll::IniInterpretator::Interpretate(const exile::ll::IniInstruction& 
 			}
 			else
 			{
-				if (ContaintsKey(sections, currentSectionName))
-				{
-					const exile::ll::IniInterpretatorSection& sec = sections.at(currentSectionName);
-					currentSection.Mov(instruction.GetArguments()[0], sec.GetValue(variableFullName[1]));
-				}
-				else
-				{
-					/*
-						TO DO:
-						Key not found
-					*/
-				}
+				exAssertFR(!ContaintsKey(sections, currentSectionName), {}, EX_ERROR, "ini section not found: %s", currentSectionName)
+				const exile::ll::IniInterpretatorSection& sec = sections.at(currentSectionName);
+				currentSection.Mov(instruction.GetArguments()[0], sec.GetValue(variableFullName[1]));
 			}
 		}
 		else
 		{
 			exile::String name = variableFullName[0];
 
+			exAssertFR(!ContaintsKey(sections, name), {}, EX_ERROR, "ini section not found: %s", name)
+
 			if (ContaintsKey(sections, name))
 			{
 				const exile::ll::IniInterpretatorSection& sec = sections.at(name);
 				currentSection.Mov(instruction.GetArguments()[0], sec.GetValue(variableFullName[1]));
-			}
-			else
-			{
-				/*
-					TO DO ERROR HANDLER
-				*/
 			}
 		}
 		//currentSection.insert(exile::UnorderedMapPair<exile::String, exile::String>(instruction.GetArguments()[0], sections[variableFullName[0]][variableFullName[1]]));
@@ -100,7 +87,7 @@ void exile::ll::IniInterpretator::Interpretate(const exile::ll::IniInstruction& 
 	}
 	}
 
-
+	return EX_SUCCESS;
 
 }
 

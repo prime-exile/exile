@@ -55,7 +55,7 @@ u8 exVersionParse(exVersion* ver, const char* buffer)
 			char c = buffer[i];
 			if(c == ':')
 			{
-				EX_s1AssertR(strcmp(tmpBuffer.buffer, "exp") != 0, {}, EX_ERROR, "failed to parse version, token \':\' founded but exp wont found!");
+				exAssertR(strcmp(tmpBuffer.buffer, "exp") != 0, {}, EX_ERROR, "failed to parse version, token \':\' founded but exp wont found!");
 				ver->isExp = EX_TRUE;
 				exString512xClear(&tmpBuffer);
 				isNumberReading = EX_TRUE;

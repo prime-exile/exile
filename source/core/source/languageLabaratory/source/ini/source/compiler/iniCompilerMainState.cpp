@@ -25,15 +25,10 @@ void exile::ll::IniCompilerMainState::Input(const Tokenized& token)
 	else if (!tokens.empty() && token.GetId() ==
 		static_cast<TokenId>(exile::ll::IniLexerTokenId::LineEnd))
 	{
+		u64 tokensSize = tokens.size();
 
-		if (tokens.size() < 2)
-		{
-			/*
-				TO DO ERROR!
-			*/
-			exit( -1);
-		}
-		else if (tokens.size() > 4)
+		exAssertF(tokensSize < 2, {}, "error: tokensSize < 2, tokensSize = %i", tokensSize);
+		if (tokens.size() > 4)
 		{
 
 			if (tokens[2].GetText() == "\"")

@@ -15,6 +15,10 @@ EX_API u8 exThreadCreate(exThread* thread, PFNExThreadStart threadStart, void* p
 
 EX_API u8 exThreadDestroy(exThread* thread);
 
+EX_API u8 exThreadActive(exThread* thread);
+
+EX_API u8 exThreadJoin(exThread* thread);
+
 EX_API void exThreadCancel(exThread* thread);
 
 EX_API u64 exThreadGetCurrentId();

@@ -58,26 +58,30 @@
 - [X] - make panic bool is we want to continue not execute code in assert
 - [X] - multithreading in C
 - [X] - CME collect stacktrace in pre proccess assert!
-- [ ] -  add/rename asserts(like debug assert for non null check)
-- [ ] - fix all asserts to do
-- [ ] - CME get thread id in error report
-- [ ] - CME Critical managment engine
-- [ ] - compiler error output!
-- [ ] - multithreading in C++
-- [ ] - error handling in interpretator
-- [ ] - fix file names
-- [ ] - fix to do file
+- [X] - CME get thread id in error report
+- [X] - compiler error output!
+- [X] - CME Central managment engine
+- [X] - fix all asserts to do
+- [X] - multithreading in C++
+- [X] - error handling in interpretator
+- [X] - try to remove Instance::Get -> make instance as global pointer!
+- [X] - variable system
+- [X] - fix to do file
 
 - [ ] - git repo
-- [ ] - variable system
+- [ ] - float and int string convertion
 - [ ] - check classes and add operators
-- [ ] - CME graphics mode!
+- [ ] - refactoring for tests
+- [ ] - fix file names
 - [ ] - plugins load sequance
 - [ ] - variables system
 - [ ] - fix header - remove headers and make empty overloads classes
 - [ ] ! - fix error with invalid unordered map keys 
+- [ ] - window module
+- [ ] - CME graphics mode!
 
-
+- [ ] - git repo
+- [ ] - scripting language
 
 - [ ] - thread safe
 

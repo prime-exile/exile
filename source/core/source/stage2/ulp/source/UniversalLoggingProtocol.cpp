@@ -101,7 +101,7 @@ void exile::UniversalLoggingProtocol::Log(LogId sourceId, exile::LogLevel l, con
 	else
 	{
 		char* buffer = exile::memory::AllocRaw<char>(formatedMessageSize + 2);
-		EX_s1AssertF(buffer == NULL, {}, EX_ERROR, "buffer == NULL");
+		exAssert(buffer == NULL, {}, "buffer == NULL");
 		vsnprintf(buffer, formatedMessageSize + 1, desc, args);
 		buffer[formatedMessageSize + 1] = '\0';
 
@@ -125,7 +125,7 @@ void exile::UniversalLoggingProtocol::Log(LogId sourceId, exile::LogLevel l, con
 	va_start(args, desc);
 	int formatedMessageSize = vsnprintf(NULL, 0, desc, args);
 	char* buffer = exile::memory::AllocRaw<char>(formatedMessageSize + 1);
-	EX_s1AssertF(buffer == NULL, {}, EX_ERROR, "buffer == NULL");
+	exAssertFR(buffer == NULL, {}, EX_ERROR, "buffer == NULL");
 	vsnprintf(buffer, formatedMessageSize, desc, args);
 	
 	const exile::LogSource& src = sources[sourceId];

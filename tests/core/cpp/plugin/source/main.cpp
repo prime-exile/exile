@@ -53,14 +53,14 @@ public:
 		
 		manager->AddPlugin(plugin, id);
 
-		exile::core::Engine::Get().GetPluginManager().GetDepencyManager().AddDepency(id, g_ThisID);
+		exGEngine.GetPluginManager().GetDepencyManager().AddDepency(id, g_ThisID);
 
 		return EX_SUCCESS;
 	}
 
 	void Unload(exile::core::IPlugin* plugin, exile::core::PluginId id) override
 	{
-		exile::core::Engine::Get().GetPluginManager().GetDepencyManager().RemoveDepency(id, g_ThisID);
+		exGEngine.GetPluginManager().GetDepencyManager().RemoveDepency(id, g_ThisID);
 
 		exile::memory::Free(plugin);
 
@@ -79,8 +79,7 @@ extern "C"
 	EXILE_API_EXPORT u8 exPluginInit(exile::core::NativePlugin* plugin, exile::core::PluginId id)
 	{
 		g_ThisID = id;
-		exile::core::Engine::Get().GetPluginManager().AddPluginLoader(&loader);
-		std::cout << "hiii" << std::endl;
+		exGEngine.GetPluginManager().AddPluginLoader(&loader);
 		//exile::core::Engine::Get().GetULP().RegisterHandler();
 		return EX_SUCCESS;
 	}

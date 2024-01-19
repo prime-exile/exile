@@ -21,7 +21,7 @@ u8 exMutexCreate(exMutex* mutex)
 	pthread_mutexattr_settype(&mutexAttr, PTHREAD_MUTEX_RECURSIVE);
 
 	int res = pthread_mutex_init(&rawMutex, &mutexAttr);
-	EX_s1AssertR(res != 0, {}, EX_ERROR, "failed to create mutex");
+	exAssertR(res != 0, {}, EX_ERROR, "failed to create mutex");
 
 	mutex->internalData = exMalloc(sizeof(pthread_mutex_t));
 	
@@ -29,8 +29,8 @@ u8 exMutexCreate(exMutex* mutex)
 
 #elif defined(EXILE_WIN)
 	mutex->internalData = CreateMutexA(NULL, NULL, NULL);
-
-	EX_s1AssertR(!mutex->internalData, {}, EX_ERROR, "failed to create mutex");
+	
+	exAssertR(!mutex->internalData, {}, EX_ERROR, "failed to create mutex");
 
 #endif
 
