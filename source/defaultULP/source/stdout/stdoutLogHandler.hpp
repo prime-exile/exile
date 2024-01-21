@@ -9,6 +9,9 @@ namespace exile
 	{
 
 	public:
+		StdOutLogHandler(){}
+		StdOutLogHandler(const StdOutLogHandler&) = delete;
+
 		const u64 Handle(exile::UniversalLoggingProtocol* proto, const exile::String& message, const exile::LogSource& type, exile::LogLevel level) override;
 
 		const exile::LogSourceType SourceTypeFilter()const override;
@@ -20,6 +23,8 @@ namespace exile
 			return "exileDefaultULP:StdOutLogHandler";
 		}
 
+		exile::StdOutLogHandler& operator=(exile::StdOutLogHandler& other) = delete;
+		exile::StdOutLogHandler& operator==(exile::StdOutLogHandler& other) = delete;
 
 	};
 }

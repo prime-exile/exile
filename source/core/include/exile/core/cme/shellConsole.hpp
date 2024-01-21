@@ -9,15 +9,21 @@ namespace exile
 	{
 		class ShellConsole : public exile::cme::IShell
 		{
+		private:
+
 			u8 isConsoleOpen;
 
 		public:
 			ShellConsole(exile::cme::CentralManagmentEngine* centralManagmentEngine);
 
+			ShellConsole(const ShellConsole&) = delete;
+
 			u8 IsOpen() override;
 
 			void Update() override;
 
+			exile::cme::ShellConsole& operator=(exile::cme::ShellConsole& other) = delete;
+			exile::cme::ShellConsole& operator==(exile::cme::ShellConsole& other) = delete;
 		};
 	}
 }

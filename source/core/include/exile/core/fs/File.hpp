@@ -10,10 +10,15 @@ namespace exile
 	{
 		class EX_API File
 		{
+		private:
+
 			FILE* handle;
+			
 		public:
 
 			File();
+
+			File(const File&) = delete;
 
 			u8 Open(const exile::core::Path& path, const char* mode);
 			u8 Open(const exile::String& path, const char* mode);
@@ -27,6 +32,11 @@ namespace exile
 			i32 Close();
 
 			FILE* GetRawHandle();
+
+			exile::core::File& operator=(exile::core::File& other) = delete;
+			exile::core::File& operator==(exile::core::File& other) = delete;
+
+			~File();
 
 		};
 	}

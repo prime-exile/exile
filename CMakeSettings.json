@@ -85,6 +85,57 @@
           "type": "STRING"
         }
       ]
+    },
+    {
+      "name": "x64-Release",
+      "generator": "Ninja",
+      "configurationType": "RelWithDebInfo",
+      "buildRoot": "${projectDir}\\out\\build\\${name}",
+      "installRoot": "${projectDir}\\out\\install\\${name}",
+      "cmakeCommandArgs": "",
+      "buildCommandArgs": "",
+      "ctestCommandArgs": "",
+      "inheritEnvironments": [ "msvc_x64_x64" ],
+      "variables": [
+        {
+          "name": "EXILE_DEFAULT_ULP_VS_OUTPUT",
+          "value": "True",
+          "type": "BOOL"
+        },
+        {
+          "name": "EXILE_DEFAULT_ULP_STDOUT",
+          "value": "True",
+          "type": "BOOL"
+        }
+      ]
+    },
+    {
+      "name": "x64-Debug-Sd",
+      "generator": "Ninja",
+      "configurationType": "Debug",
+      "buildRoot": "${projectDir}\\out\\build\\${name}",
+      "installRoot": "${projectDir}\\out\\install\\${name}",
+      "cmakeCommandArgs": "",
+      "buildCommandArgs": "",
+      "ctestCommandArgs": "",
+      "inheritEnvironments": [ "msvc_x64_x64" ],
+      "variables": [
+        {
+          "name": "EXILE_VARIABLE_STORAGE_DISABLE",
+          "value": "True",
+          "type": "BOOL"
+        },
+        {
+          "name": "EXILE_DEFAULT_ULP_STDOUT",
+          "value": "True",
+          "type": "BOOL"
+        },
+        {
+          "name": "EXILE_CME_DUMP_DISABLE",
+          "value": "True",
+          "type": "BOOL"
+        }
+      ]
     }
   ]
 }

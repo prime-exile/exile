@@ -5,7 +5,7 @@
 #include <exile/core/memory.hpp>
 #include <exile/core/containers/string.hpp>
 #include <exile/core/containers/unordered_map.hpp>
-#include <exile/core/u64ToString.hpp>
+#include <exile/core/string/u64ToString.hpp>
 
 #define ContaintsKey(map, k)(map.find(k) != map.end())
 #define ContaintsSym(s)(std::find_if(s.begin(), s.end(), ::isalpha) != s.end())
@@ -167,37 +167,64 @@ namespace exile
 
 		class EnvironmentStorage
 		{
+		private:
 
+#if !defined(EXILE_DISABLE_VAR_STORAGE)
 			exile::UnorderedMap<exile::String, Variable> vars;
+#endif
 		public:
+			EnvironmentStorage()
+			{}
+
+			EnvironmentStorage(const PluginDepencyManager& other) = delete;
 
 			__forceinline u8 Contains(const exile::String& name)
 			{
+#if !defined(EXILE_DISABLE_VAR_STORAGE)
 				return ContaintsKey(vars, name);
+#else 
+				return EX_FALSE;
+#endif
 			}
 
-			__forceinline Variable& GetVariable(const exile::String& name)
+			__forceinline Variable* GetVariable(const exile::String& name)
 			{
-				exAssertF(!ContaintsKey(vars, name), {}, "variable \'%s\' not exists", name.c_str());
-				return vars[name];
+#if defined(EXILE_DISABLE_VAR_STORAGE)
+				return NULL;
+#else 
+				if (!ContaintsKey(vars, name)) return NULL;
+				return &vars[name];
+#endif
 			}
 
 			__forceinline u8 RegisterVariable(const exile::String& name, const Variable& info)
 			{
+#if defined(EXILE_DISABLE_VAR_STORAGE)
+				return EX_SUCCESS;
+#else
 				exAssertFR(ContaintsKey(vars, name), {}, EX_ERROR, "failed to register variable '%s', variable with this name already exists", name.c_str());
 				vars[name] = info;
 				return EX_SUCCESS;
+#endif
+
 			}
 
 			__forceinline u8 RegisterVariable(const exile::String& name, const exile::String value)
 			{
+#if defined(EXILE_DISABLE_VAR_STORAGE)
+				return EX_SUCCESS;
+#else
 				exAssertFR(ContaintsKey(vars, name), {}, EX_ERROR, "failed to register variable '%s', variable with this name already exists", name.c_str());
 				vars[name] = Variable(VariableValue(value));
 				return EX_SUCCESS;
+#endif
 			}
 
 			__forceinline u8 RegisterVariableAuto(const exile::String& name, const exile::String newValue)
 			{
+#if defined(EXILE_DISABLE_VAR_STORAGE)
+				return EX_SUCCESS;
+#else
 				exAssertFR(ContaintsKey(vars, name), {}, EX_ERROR, "failed to register variable '%s', variable with this name already exists", name.c_str());
 				if (ContaintsSym(newValue))
 				{
@@ -209,7 +236,12 @@ namespace exile
 				}
 				
 				return EX_SUCCESS;
+#endif
 			}
+
+			exile::core::EnvironmentStorage& operator=(exile::core::PluginManager& other) = delete;
+			exile::core::EnvironmentStorage& operator==(exile::core::PluginManager& other) = delete;
+
 		};
 	}
 }

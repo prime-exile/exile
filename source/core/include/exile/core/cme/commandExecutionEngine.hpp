@@ -10,10 +10,14 @@ namespace exile
 	{
 		class EX_API CommandExecutionEngine
 		{
+		private:
 
 			exile::UnorderedMap<exile::String, exile::cme::ICommand*> commands;
 
 		public:
+
+			CommandExecutionEngine(){}
+			CommandExecutionEngine(const CommandExecutionEngine&) = delete;
 
 			u8 RegisterCommand(const exile::String& name, exile::cme::ICommand* command);
 			void UnregisterCommand(const exile::String& name);
@@ -22,6 +26,9 @@ namespace exile
 
 			u8 Execute(const exile::String& command);
 			u8 Execute(const exile::String& commandName, const exile::Vector<exile::String> args);
+
+			exile::cme::CommandExecutionEngine& operator=(exile::cme::CommandExecutionEngine& other) = delete;
+			exile::cme::CommandExecutionEngine& operator==(exile::cme::CommandExecutionEngine& other) = delete;
 
 		};
 	}

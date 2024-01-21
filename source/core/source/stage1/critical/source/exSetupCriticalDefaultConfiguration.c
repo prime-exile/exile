@@ -5,7 +5,7 @@
 
 #define EXILE_PRIVATE
 #include <exile/core/critical.h>
-#include <exile/core/u64ToString.h>
+#include <exile/core/string/u64ToString.h>
 #include <exile/core/psstring.h>
 #include <exile/core/module.h>
 

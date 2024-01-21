@@ -41,6 +41,8 @@ namespace exile
 
 			u8 exists()const;
 
+			exile::core::Path& operator==(exile::core::Path& other) = delete;
+
 			virtual ~Path()
 			{
 			}

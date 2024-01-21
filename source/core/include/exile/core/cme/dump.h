@@ -157,10 +157,14 @@ static __forceinline u8 exCMEAssertCollectStacktrace()
 
 static __forceinline u8 exCMEDump()
 {
+#if defined(EXILE_DISABLE_CME_DUMP)
+	return EX_SUCCESS;
+#else
 	exCMEAssertCollectStacktrace();
 	exCMESetThreadId(exThreadGetCurrentId());
-	
+
 	return EX_SUCCESS;
+#endif
 }
 
 

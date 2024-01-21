@@ -1,14 +1,19 @@
 #ifndef _EXILE_CORE_THREAD_HPP_
 #define _EXILE_CORE_THREAD_HPP_
 
-#include <exile/core/containers/function.hpp>
+extern "C"
+{
 #include <exile/core/thread/thread.h>
+}
+
+#include <exile/core/containers/function.hpp>
+#include <exile/core/api.h>
 
 namespace exile
 {
-	class Thread
+	class EX_API Thread
 	{
-		exThread rawThread;
+	private:
 
 		struct ThreadCallData
 		{
@@ -16,45 +21,35 @@ namespace exile
 			void* argumentsPointer;
 		};
 
+	private:
+
+		exThread rawThread;
+
 
 	public:
+		Thread();
+		Thread(const Thread&) = delete;
+
 		template<class Arguments>
 		inline u8 Run(exile::Function<u32(Arguments*)>& func, Arguments* args);
 
 		//recommended way!
 		inline u8 Run(exile::Function<u32()> func);
 
-		inline u64 GetThreadId()
-		{
-			return rawThread.threadId;
-		}
+		inline u64 GetThreadId();
 
-		static u64 GetCurrentThreadId()
-		{
-			return exThreadGetCurrentId();
-		}
+		static u64 GetCurrentThreadId();
 
-		void Destroy()
-		{
-			exThreadDestroy(&rawThread);
-		}
+		void Destroy();
 
-		u8 IsActive()
-		{
-			return exThreadActive(&rawThread);
-		}
+		u8 IsActive();
 
-		u8 Join()
-		{
-			return exThreadJoin(&rawThread);
-		}
+		u8 Join();
 
-		void Cancel()
-		{
-			exThreadCancel(&rawThread);
-		}
-
+		void Cancel();
 		
+		Thread& operator=(const Thread&) = delete;
+		Thread& operator==(const Thread&) = delete;
 
 	};
 

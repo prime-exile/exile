@@ -14,17 +14,24 @@ namespace exile
 		LogSourceTypeALL = LogSourceTypeCore | LogSourceTypePlugin
 	};
 
-	class  LogSource
+	class LogSource
 	{
+	protected:
+
 		LogSourceType type;
 		exile::String name;
 
 	public:
+		
+		LogSource() = delete;
+		
 		inline LogSource(LogSourceType type, const exile::String& name)
-			:type(type), name(name)
-		{
+		:type(type), name(name)
+		{}
 
-		}
+		inline LogSource(const LogSource& source)
+		:name(source.name), type(source.type)
+		{}
 
 		inline const LogSourceType GetType() const
 		{
@@ -35,6 +42,17 @@ namespace exile
 		{
 			return name;
 		}
+
+		exile::LogSource& operator=(exile::LogSource& other)
+		{
+			name = other.name;
+			type = other.type;
+			return *this;
+		}
+
+		exile::LogSource& operator==(exile::LogSource& other) = delete;
+
+		virtual ~LogSource(){}
 	};
 }
 

@@ -10,19 +10,21 @@ namespace exile
 	{
 		class EX_API CentralManagmentEngine
 		{
+		private:
+
 			exile::cme::CommandExecutionEngine cmdEngine;
-		
+			exile::cme::IShell* currentShell;
+
 			exile::String panicMessage;
-
-			IShell* currentShell;
+		
 			u8 continueExection;
-
 			u64 threadId;
-
 			exile::Vector<exile::String> stacktrace;
+
 		public:
 
 			CentralManagmentEngine();
+			CentralManagmentEngine(const CentralManagmentEngine&) = delete;
 
 			exile::cme::CommandExecutionEngine& GetCommandEngine();
 
@@ -44,6 +46,9 @@ namespace exile
 
 			void SetThreadId(u64 id);
 			u64 GetThreadId();
+
+			exile::cme::CentralManagmentEngine& operator=(exile::cme::CommandExecutionEngine& other) = delete;
+			exile::cme::CentralManagmentEngine& operator==(exile::cme::CommandExecutionEngine& other) = delete;
 
 			~CentralManagmentEngine();
 		};

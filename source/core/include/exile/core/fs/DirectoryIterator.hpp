@@ -1,3 +1,6 @@
+#ifndef _EXILE_CORE_DIRECTORY_ITERATOR_HPP_
+#define _EXILE_CORE_DIRECTORY_ITERATOR_HPP_
+
 #include <exile/core/fs/Path.hpp>
 
 #if defined(EXILE_WIN)
@@ -13,6 +16,8 @@ namespace exile
 	{
 		class EX_API DirectoryIterator
 		{
+		private:
+
 #if defined(EXILE_WIN)
 			HANDLE findHandle;
 			WIN32_FIND_DATA findFileData;
@@ -28,16 +33,22 @@ namespace exile
 			DirectoryIterator(const exile::String& path);
 			DirectoryIterator(const exile::core::Path& path);
 
-			bool IsFinished() const;
+			DirectoryIterator(const DirectoryIterator&) = delete;
 
+			bool IsFinished() const;
 
 			DirectoryIterator& operator++();
 			const exile::String GetCurrentName() const;
 
 			bool IsDirectory() const;
 
+			exile::core::DirectoryIterator& operator=(exile::core::DirectoryIterator& other) = delete;
+			exile::core::DirectoryIterator& operator==(exile::core::DirectoryIterator& other) = delete;
+
 			~DirectoryIterator();
 
 		};
 	}
 }
+
+#endif

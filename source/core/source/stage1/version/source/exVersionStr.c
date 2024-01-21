@@ -1,6 +1,6 @@
 #include <exile/core/version.h>
-#include <exile/core/u16ToString.h>
-#include <exile/core/u8ToString.h>
+#include <exile/core/string/u16ToString.h>
+#include <exile/core/string/u8ToString.h>
 #include <string.h>
 
 /*

@@ -6,6 +6,7 @@ if(EXILE_BUILD_DEV)
 add_compile_definitions(EXILE_DEV)
 endif()
 
+
 option(EXILE_ULP_LOG_OPTIMIZED_MODE "in this mode formatted log we have 1024 buffer size" OFF)
 option(EXILE_ULP_LOG_DYNAMIC_MODE "in this mode formatted log we have 1024 buffer size but if we have bigger message we allocate new buffer" ON)
 option(EXILE_ULP_LOG_FULL_DYNAMIC_MODE "in this mode formatted log we allocate new buffer for message" OFF)

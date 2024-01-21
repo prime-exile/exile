@@ -35,3 +35,4 @@ elseif(EXILE_ARCH STREQUAL "ARM64")
     endif()
 endif()
 
+include ("${CMAKE_SOURCE_DIR}/source/cmake/configuration.cmake")

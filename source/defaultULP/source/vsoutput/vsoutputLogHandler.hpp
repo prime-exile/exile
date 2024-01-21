@@ -9,6 +9,10 @@ namespace exile
 	{
 
 	public:
+		
+		VSOutLogHandler(){}
+		VSOutLogHandler(const VSOutLogHandler&) = delete;
+
 		const u64 Handle(exile::UniversalLoggingProtocol* proto, const exile::String& message, const exile::LogSource& type, exile::LogLevel level);
 
 		const exile::LogSourceType SourceTypeFilter()const;
@@ -19,6 +23,9 @@ namespace exile
 		{
 			return "exileDefaultULP:VSOutLogHandler";
 		}
+
+		exile::VSOutLogHandler& operator=(exile::VSOutLogHandler& other) = delete;
+		exile::VSOutLogHandler& operator==(exile::VSOutLogHandler& other) = delete;
 
 
 	};

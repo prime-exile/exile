@@ -20,10 +20,16 @@ namespace exile
 
 		class EX_API PluginDepencyManager
 		{
+		private:
 
 			exile::UnorderedMap<PluginId, exile::Vector<PluginId>> dependices;
 
 		public:
+
+			PluginDepencyManager()
+			{}
+
+			PluginDepencyManager(const PluginDepencyManager& other) = delete;
 			
 			const exile::Vector<PluginId>& GetDependices(PluginId pluginId) const;
 
@@ -33,10 +39,16 @@ namespace exile
 
 			PluginId IsPluginDepencyFree(PluginId pluginId);
 
+			exile::core::PluginDepencyManager& operator=(exile::core::PluginDepencyManager& other) = delete;
+			exile::core::PluginDepencyManager& operator==(exile::core::PluginDepencyManager& other) = delete;
+
+
 		};
 
 		class EX_API PluginManager
 		{
+		private:
+
 			exile::Vector<exile::core::IPlugin*> plugins;
 			exile::Vector<exile::core::IPluginLoader*> loaders;
 
@@ -49,6 +61,7 @@ namespace exile
 		public:
 			PluginManager();
 
+			PluginManager(const PluginDepencyManager& other) = delete;
 
 			PluginDepencyManager& GetDepencyManager();
 
@@ -69,6 +82,11 @@ namespace exile
 			u8 UnloadPlugin(const PluginId id);
 
 			void UnloadPlugins();
+
+
+			exile::core::PluginManager& operator=(exile::core::PluginManager& other) = delete;
+			exile::core::PluginManager& operator==(exile::core::PluginManager& other) = delete;
+
 
 		};
 	}

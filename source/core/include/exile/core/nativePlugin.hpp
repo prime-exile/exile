@@ -36,6 +36,8 @@ namespace exile
 			NativePluginLoader(u8 type);
 			NativePluginLoader();
 
+			NativePluginLoader(const NativePluginLoader&) = delete;
+
 			u8 operator()(exile::core::PluginManager* manager, const exile::String& entry);
 			u8 operator()(exile::core::PluginManager* manager, const exile::String& entry, const exVersion& version, exile::core::PluginId id) override;
 
@@ -46,14 +48,21 @@ namespace exile
 			u8 Load(exile::core::PluginManager* manager, const exile::String& directory);
 			u8 Load(exile::core::PluginManager* manager, const exile::String& directory,  const exVersion& version, exile::core::PluginId id);
 
+			exile::core::NativePluginLoader& operator=(exile::core::NativePluginLoader& other) = delete;
+			exile::core::NativePluginLoader& operator==(exile::core::NativePluginLoader& other) = delete;
+
 		};
 
 
 		class EX_API NativePlugin : public::exile::core::IPlugin
 		{
+		private:
+
 			RawPluginHandle handle;
+
 		public:
 
+			NativePlugin(const NativePlugin&) = delete;
 			NativePlugin();
 
 			NativePlugin(RawPluginHandle handle);
@@ -69,6 +78,9 @@ namespace exile
 			RawPluginHandle GetRawHandle();
 
 			~NativePlugin();
+
+			exile::core::NativePlugin& operator=(exile::core::NativePlugin& other) = delete;
+			exile::core::NativePlugin& operator==(exile::core::NativePlugin& other) = delete;
 
 		};
 	}

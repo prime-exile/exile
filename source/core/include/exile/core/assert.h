@@ -3,7 +3,7 @@
 
 #include <exile/core/critical.h>
 #include <exile/core/cme/cme.h>
-#include <exile/core/assertCME.h>
+#include <exile/core/cme/dump.h>
 #include <exile/core/assertNew.h>
 
 

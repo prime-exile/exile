@@ -10,6 +10,8 @@
 #include <exile/core/instance.hpp>
 #include <exile/core/cme/instance.hpp>
 #include <exile/core/assertNew.h>
+#include <exile/core/string/f32ToString.h>
+#include <exile/core/string/i8ToString.h>
 #include <exile/core/storage.hpp>
 
 #include <iostream>
@@ -99,8 +101,26 @@ int main()
 	{
 		exSetupCriticalDefaultConfiguration();
 		
-		auto& engine = exGEngine;
+		float conv = 152.1229389f;
 
+		u64 digitsCount = exF32DigitsCount(conv,10);
+		char buffer[1024];
+		exMemset(buffer, 0, 1024);
+		exF32ToString(conv, digitsCount, buffer, 10);
+
+		puts(buffer);
+
+
+		i8 cov = -124;
+
+		digitsCount = exI8DigitsCount(cov);
+		exMemset(buffer, 0, 1024);
+		exI8ToString(cov, digitsCount, buffer);
+
+		puts(buffer);
+
+
+		auto& engine = exGEngine;
 
 		u8 res = engine.GetPluginManager().LoadPlugin("exDefaultULP");
 
@@ -112,13 +132,20 @@ int main()
 			exThreadSleep(100);
 			printf("hello world %i %i %i\n\r", args->ih, args->il, args->rb);
 			return 0;
-			};
+		};
 
 		ar.ih = 1;
 		ar.il = 2;
 		ar.rb = 532;
 		th.Run<ThreadArguments>(f, &ar);
 		printf("jelolasdasdlasdlas';d");
+		
+		
+		
+		
+		
+		
+		
 		exThreadSleep(100);
 
 		th.Join();

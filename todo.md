@@ -67,20 +67,19 @@
 - [X] - try to remove Instance::Get -> make instance as global pointer!
 - [X] - variable system
 - [X] - fix to do file
-
-- [ ] - git repo
-- [ ] - float and int string convertion
-- [ ] - check classes and add operators
-- [ ] - refactoring for tests
-- [ ] - fix file names
-- [ ] - plugins load sequance
-- [ ] - variables system
-- [ ] - fix header - remove headers and make empty overloads classes
-- [ ] ! - fix error with invalid unordered map keys 
+- [X] - float and int string convertion
+- [X] - check classes and add operators
+- [ ] - threads test
 - [ ] - window module
+
+- [ ] - refactoring for tests
+- [ ] - core public repo
+- [ ] - window module public repo
 - [ ] - CME graphics mode!
 
 - [ ] - git repo
+- [ ] - variable refrances?
+- [ ] - plugins load sequance
 - [ ] - scripting language
 
 - [ ] - thread safe

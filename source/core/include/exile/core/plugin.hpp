@@ -13,6 +13,8 @@ namespace exile
 	{
 		class IPlugin
 		{
+		private:
+
 			u8 type;
 			exile::String name;
 			exVersion version;
@@ -27,14 +29,11 @@ namespace exile
 
 		public:
 
+			IPlugin(const IPlugin&) = delete;
+
 			const exVersion& GetVersion() const
 			{
 				return version;
-			}
-
-			virtual const exile::String& GetDescription() const
-			{
-				return "";
 			}
 
 			const u8 GetType() const
@@ -46,6 +45,9 @@ namespace exile
 			{
 				return name;
 			}
+
+			exile::core::IPlugin& operator=(exile::core::IPlugin& other) = delete;
+			exile::core::IPlugin& operator==(exile::core::IPlugin& other) = delete;
 
 			virtual ~IPlugin()
 			{

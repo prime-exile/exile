@@ -59,7 +59,7 @@ namespace exile
 							}
 							else
 							{
-								exile::core::VariableValue& val = exGEngine.GetEnv().GetVariable(varName).GetValue();
+								exile::core::VariableValue& val = exGEngine.GetEnv().GetVariable(varName)->GetValue();
 								switch (val.GetDataType())
 								{
 								case exile::core::VariableValueDataType::integer:

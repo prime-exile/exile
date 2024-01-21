@@ -12,12 +12,16 @@ namespace exile
 
 	class EX_API UniversalLoggingProtocol
 	{
+	private:
+
 		exile::Vector<LogHandler*> handlers;
 		exile::Vector<LogSource> sources;
 		LogId coreId;
+
 	public:
 
 		UniversalLoggingProtocol();
+		UniversalLoggingProtocol(const UniversalLoggingProtocol&) = delete;
 
 		const LogId& GetCoreId() const;
 
@@ -35,6 +39,14 @@ namespace exile
 
 		void RemoveSource(const LogId id);
 		void RemoveHandler(const LogId id);
+
+		exile::UniversalLoggingProtocol& operator=(exile::UniversalLoggingProtocol& other) = delete;
+		exile::UniversalLoggingProtocol& operator==(exile::UniversalLoggingProtocol& other) = delete;
+
+		~UniversalLoggingProtocol()
+		{
+
+		}
 
 	};
 }

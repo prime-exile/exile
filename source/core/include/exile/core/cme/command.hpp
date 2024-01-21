@@ -17,6 +17,14 @@ namespace exile
 				return EX_SUCCESS;
 			}
 
+			ICommand(){}
+			ICommand(const exile::cme::ICommand&) = delete;
+
+			exile::cme::ICommand& operator=(exile::cme::ICommand& other) = delete;
+			exile::cme::ICommand& operator==(exile::cme::ICommand& other) = delete;
+
+			virtual ~ICommand(){}
+
 		};
 	}
 }

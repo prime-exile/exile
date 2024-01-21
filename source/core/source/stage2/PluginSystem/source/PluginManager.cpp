@@ -9,7 +9,7 @@ extern "C"
 
 #include <exile/core/assert.h>
 
-#include <exile/core/u64ToString.hpp>
+#include <exile/core/string/u64ToString.hpp>
 #include <algorithm>
 
 void exile::core::PluginManager::ConfigureIniParser(exile::ll::IniParser& parser)

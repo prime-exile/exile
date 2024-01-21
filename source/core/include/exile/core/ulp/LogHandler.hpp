@@ -13,6 +13,12 @@ namespace exile
 	{
 
 	public:
+		LogHandler()
+		{
+
+		}
+
+		LogHandler(const LogHandler&) = delete;
 
 		virtual const u64 Handle(exile::UniversalLoggingProtocol* proto, const exile::String& message, const exile::LogSource& type, exile::LogLevel level)
 		{
@@ -34,6 +40,10 @@ namespace exile
 			return "unnamed!";
 		}
 
+		exile::LogHandler& operator=(exile::LogHandler& other) = delete;
+		exile::LogHandler& operator==(exile::LogHandler& other) = delete;
+
+		virtual ~LogHandler(){}
 	};
 }
 

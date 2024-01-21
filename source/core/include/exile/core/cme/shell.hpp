@@ -13,29 +13,28 @@ namespace exile
 		class IShell
 		{
 		protected:
+
 			exile::cme::CentralManagmentEngine* centralManagmentEngine;
+
 		public:
 			IShell(exile::cme::CentralManagmentEngine* centralManagmentEngine)
 				:centralManagmentEngine(centralManagmentEngine)
 
-			{
+			{}
 
-			}
+			IShell(const IShell&) = delete;
 
 			virtual u8 IsOpen()
 			{
 				return false;
 			}
 
-			virtual void Update()
-			{
-				
-			}
+			virtual void Update(){}
 
-			virtual ~IShell()
-			{
+			exile::cme::IShell& operator=(exile::cme::IShell& other) = delete;
+			exile::cme::IShell& operator==(exile::cme::IShell& other) = delete;
 
-			}
+			virtual ~IShell(){}
 		};
 	}
 }

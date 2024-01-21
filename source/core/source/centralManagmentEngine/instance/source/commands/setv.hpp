@@ -58,6 +58,7 @@ namespace exile
 					{
 						carg.erase(std::remove(carg.begin(), carg.end(), '\"'), carg.end());
 						exGEngine.GetEnv().RegisterVariable(args[0], carg);
+						exGEngine.GetEnv().RegisterVariable(args[0], carg);
 					}
 					else
 					{

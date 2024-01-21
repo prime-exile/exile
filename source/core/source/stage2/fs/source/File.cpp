@@ -92,11 +92,20 @@ i64 exile::core::File::Read(exile::String& buffer, u64 bytesToRead)
 
 i32 exile::core::File::Close()
 {
-
-	return fclose(handle);
+	i32 r = fclose(handle);
+	handle = NULL;
+	return r;
 }
 
 FILE* exile::core::File::GetRawHandle()
 {
 	return handle;
+}
+
+exile::core::File::~File()
+{
+	if (handle != NULL)
+	{ 
+		Close();
+	}
 }

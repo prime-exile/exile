@@ -20,6 +20,8 @@ namespace exile
 
 		class IPluginLoader
 		{
+		private:
+
 			u8 type;
 
 		protected:
@@ -31,6 +33,9 @@ namespace exile
 			}
 
 		public:
+
+			IPluginLoader(const IPluginLoader&) = delete;
+
 
 			virtual u8 operator()(exile::core::PluginManager* manager, const exile::String& entry, const exVersion& version, exile::core::PluginId id)
 			{
@@ -56,6 +61,10 @@ namespace exile
 			{
 				return "None";
 			}
+
+			exile::core::IPluginLoader& operator=(exile::core::IPluginLoader& other) = delete;
+			exile::core::IPluginLoader& operator==(exile::core::IPluginLoader& other) = delete;
+
 		};
 	}
 }
