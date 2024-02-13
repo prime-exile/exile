@@ -16,10 +16,10 @@ namespace exile
 			exile::cme::IShell* currentShell;
 
 			exile::String panicMessage;
+			exile::Vector<exile::String> stacktrace;
 		
 			u8 continueExection;
 			u64 threadId;
-			exile::Vector<exile::String> stacktrace;
 
 		public:
 

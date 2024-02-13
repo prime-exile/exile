@@ -38,6 +38,7 @@ namespace exile
 
 			void AddSection(const exile::String& name,const exile::ll::IniInterpretatorSection& newSection);
 			const exile::ll::IniInterpretatorSection& GetSection(const exile::String& name) const;
+			const u8 Containts(const exile::String& name) const;
 
 			void Complete();
 			~IniInterpretator();

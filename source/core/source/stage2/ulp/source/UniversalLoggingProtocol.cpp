@@ -25,6 +25,31 @@ static __forceinline u8 contains(const exile::Vector<exile::LogHandler*>& vec, c
 	return false;
 }
 
+
+static exile::UniversalLoggingProtocol defaultImpl;
+
+exile::UniversalLoggingProtocol* exile::UniversalLoggingProtocol::impl = &defaultImpl;
+
+void exile::UniversalLoggingProtocol::SetupImpl(UniversalLoggingProtocol* impl)
+{
+	exile::UniversalLoggingProtocol::impl = impl;
+}
+
+exile::UniversalLoggingProtocol* exile::UniversalLoggingProtocol::Get()
+{
+	return impl;
+}
+
+const exile::Vector<exile::LogHandler*>& exile::UniversalLoggingProtocol::GetLogHandlers()
+{
+	return handlers;
+}
+
+const exile::Vector<exile::LogSource>& exile::UniversalLoggingProtocol::GetSources()
+{
+	return sources;
+}
+
 exile::UniversalLoggingProtocol::UniversalLoggingProtocol()
 {
 	exile::LogSource coreSource(exile::LogSourceTypeCore, "exile.core");

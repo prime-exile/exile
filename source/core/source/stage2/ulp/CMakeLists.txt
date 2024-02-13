@@ -4,7 +4,6 @@ project("exile.core")
 
 
 set(CPP_SOURCES 
-	"${CMAKE_CURRENT_SOURCE_DIR}/source/ulp.cpp"
 	"${CMAKE_CURRENT_SOURCE_DIR}/source/UniversalLoggingProtocol.cpp"
 )
 

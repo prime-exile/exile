@@ -34,6 +34,11 @@ const exile::ll::IniInterpretatorSection& exile::ll::IniInterpretator::GetSectio
 	return sections.at(name);
 }
 
+const u8 exile::ll::IniInterpretator::Containts(const exile::String& name) const
+{
+	return ContaintsKey(sections, name);
+}
+
 void exile::ll::IniInterpretator::Complete()
 {
 	sections.insert(exile::UnorderedMapPair<exile::String, exile::ll::IniInterpretatorSection>(currentSectionName, currentSection));

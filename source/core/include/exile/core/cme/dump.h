@@ -3,6 +3,7 @@
 
 #include <exile/core/API.h>
 #include <exile/core/thread/thread.h>
+#include <exile/core/memory.h>
 
 #if defined(EXILE_WIN)
 #include<Windows.h>

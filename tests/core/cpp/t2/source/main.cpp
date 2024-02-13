@@ -12,7 +12,8 @@
 #include <exile/core/assertNew.h>
 #include <exile/core/string/f32ToString.h>
 #include <exile/core/string/i8ToString.h>
-#include <exile/core/storage.hpp>
+#include <exile/core/hash.hpp>
+#include <exile/core/cvar.hpp>
 
 #include <iostream>
 #include <exile/core/containers/sstream.hpp>
@@ -101,27 +102,16 @@ int main()
 	{
 		exSetupCriticalDefaultConfiguration();
 		
-		float conv = 152.1229389f;
-
-		u64 digitsCount = exF32DigitsCount(conv,10);
-		char buffer[1024];
-		exMemset(buffer, 0, 1024);
-		exF32ToString(conv, digitsCount, buffer, 10);
-
-		puts(buffer);
-
-
-		i8 cov = -124;
-
-		digitsCount = exI8DigitsCount(cov);
-		exMemset(buffer, 0, 1024);
-		exI8ToString(cov, digitsCount, buffer);
-
-		puts(buffer);
-
+		u64 hres = exile::hash::fnv1a32("hello world");
+		std::cout << "hres =" << hres << std::endl;
 
 		auto& engine = exGEngine;
 
+		exile::core::CVarSystem::SetupDefaultImpl();
+
+		exile::core::CVarSystem::Get()->CreateStringCVar("test.int", "tester", "sd3", "ss2");
+
+		exile::core::CVarDesc* desc = exile::core::CVarSystem::Get()->GetCVar(exile::hash::fnv1a32("test.int"));
 		u8 res = engine.GetPluginManager().LoadPlugin("exDefaultULP");
 
 		exile::Thread th;

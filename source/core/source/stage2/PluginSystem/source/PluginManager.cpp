@@ -134,13 +134,6 @@ u8 exile::core::PluginManager::LoadPlugin(const exile::String& directory)
 
 	exile::core::IPluginLoader* loader = GetPluginLoader(typeId);
 	exAssertFR(loader == NULL, {}, EX_ERROR, "unregistered loader id: %i for plugin %s", typeId, directory.c_str());
-	//if (loader == NULL)
-	//{
-	//	/*
-	//		TO DO ERROR:
-	//		UNREGISTERED LOADER!
-	//	*/
-	//}
 
 	const exile::String pluginEntry = pluginConfig.GetValue("entry");
 	exile::String fullPluginEntry = directory + "/";
@@ -188,7 +181,6 @@ u8 exile::core::PluginManager::UnloadPlugin(const PluginId id)
 void exile::core::PluginManager::UnloadPlugins()
 {
 	/*
-		TO DO:
 		may be use stack?
 	*/
 	std::reverse(plugins.begin(), plugins.end());

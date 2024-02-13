@@ -89,6 +89,8 @@
 
 #pragma region Debug assert
 
+#if defined(EXILE_DEV)
+
 #define exAssertDebug(pred, code, msg)\
 	exAssert(pred, code, msg);
 
@@ -100,6 +102,32 @@
 
 #define exAssertDebugFR(pred, code, value, msg, ...)\
 	exAssertFR(pred, code, value, msg, __VA_ARGS__);
+
+#else
+
+#define exAssertDebug(pred, code, msg)\
+	if(pred){\
+		code\
+	}\
+
+#define exAssertDebugR(pred, code, value, msg)\
+	if(pred){\
+		code\
+		return value;\
+	}\
+
+#define exAssertDebugF(pred, code, msg, ...)\
+	if(pred){\
+		code\
+	}\
+
+#define exAssertDebugFR(pred, code, value, msg, ...)\
+	if(pred){\
+		code\
+		return value;\
+	}\
+
+#endif
 
 #pragma endregion
 

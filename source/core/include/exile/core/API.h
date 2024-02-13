@@ -47,4 +47,19 @@ typedef int16_t i16;
 typedef int32_t i32;
 typedef int64_t i64;
 
+#define EXILE_SINGLETONE(classname)\
+	private:\
+		static classname exSingletone;\
+	public:\
+		static classname& Get(){\
+			return exSingletone;\
+		}\
+
+#define EXILE_SINGLETONE_SRC(classname)\
+		classname classname::exSingletone
+
+
+#define EXILE_SINGLETONE_SRCC(classname, ...)\
+		classname classname::exSingletone(__VA_ARGS__)
+
 #endif

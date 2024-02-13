@@ -4,3 +4,4 @@ project("exile" C CXX)
 
 add_subdirectory("t1")
 add_subdirectory("t2")
+add_subdirectory("t3")

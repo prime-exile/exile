@@ -37,11 +37,11 @@ extern "C"
 		gCurrentPluginId = id;
 
 #if defined(EXILE_DULP_STDOUT)
-		exGEngine.GetULP().RegisterHandler(&stdOutLogHandler, stdOutHandlerId);
+		exile::UniversalLoggingProtocol::Get()->RegisterHandler(&stdOutLogHandler, stdOutHandlerId);
 #endif
 
 #if defined(EXILE_DULP_VS_OUTPUT)
-		exGEngine.GetULP().RegisterHandler(&vsOutLogHandler, vsOutHandlerId);
+		exile::UniversalLoggingProtocol::Get()->RegisterHandler(&vsOutLogHandler, vsOutHandlerId);
 #endif
 		return EX_SUCCESS;
 	}
@@ -50,12 +50,12 @@ extern "C"
 	EXILE_API_EXPORT void exPluginTermiate()
 	{
 #if defined(EXILE_DULP_STDOUT)
-		exGEngine.GetULP().RemoveHandler(stdOutHandlerId);
+		exile::UniversalLoggingProtocol::Get()->RemoveHandler(stdOutHandlerId);
 		//exile::core::Engine::Get().GetULP().RemoveHandler("exileDefaultULP:StdOutLogHandler");
 #endif
 
 #if defined(EXILE_DULP_VS_OUTPUT)
-		exGEngine.GetULP().RemoveHandler(vsOutHandlerId);
+		exile::UniversalLoggingProtocol::Get()->RemoveHandler(vsOutHandlerId);
 		//exile::core::Engine::Get().GetULP().RemoveHandler("exileDefaultULP:VSOutLogHandler");
 #endif		//exileDefaultULP:VSOutLogHandler
 	}

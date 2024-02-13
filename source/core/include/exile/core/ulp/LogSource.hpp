@@ -23,7 +23,8 @@ namespace exile
 
 	public:
 		
-		LogSource() = delete;
+		LogSource() 
+		{}
 		
 		inline LogSource(LogSourceType type, const exile::String& name)
 		:type(type), name(name)
@@ -43,7 +44,7 @@ namespace exile
 			return name;
 		}
 
-		exile::LogSource& operator=(exile::LogSource& other)
+		exile::LogSource& operator= (const exile::LogSource& other)
 		{
 			name = other.name;
 			type = other.type;

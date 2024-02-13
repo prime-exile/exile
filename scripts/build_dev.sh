@@ -1,3 +1,3 @@
 #/bin/bash
 cd build;
-cmake --build .;
+cmake --build . -- -j 4;

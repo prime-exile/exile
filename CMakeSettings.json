@@ -65,6 +65,16 @@
           "name": "EXILE_DEFAULT_ULP_STDOUT",
           "value": "True",
           "type": "BOOL"
+        },
+        {
+          "name": "EXILE_WINDOW_USE_LINUX_X11",
+          "value": "False",
+          "type": "BOOL"
+        },
+        {
+          "name": "EXILE_WINDOW_USE_LINUX_WAYLAND",
+          "value": "True",
+          "type": "BOOL"
         }
       ]
     },

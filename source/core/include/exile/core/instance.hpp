@@ -6,7 +6,7 @@
 #include <exile/core/nativePlugin.hpp>
 #include <exile/core/cme/instance.hpp>
 #include <exile/core/cme/shellConsole.hpp>
-#include <exile/core/storage.hpp>
+#include <exile/core/cvar.hpp>
 
 namespace exile
 {
@@ -17,11 +17,11 @@ namespace exile
 		private:
 
 			exile::cme::ShellConsole consoleShell;
-			exile::UniversalLoggingProtocol ulp;
 			exile::core::NativePluginLoader nativePluginLoader;
 			exile::core::PluginManager pluginManager;
 			exile::cme::CentralManagmentEngine centralManagmentEngine;
-			exile::core::EnvironmentStorage env;
+
+			u8 CollectInformation(exile::core::PluginDepencyMap& depMap, const exile::String& folder);
 
 		public:
 
@@ -31,9 +31,6 @@ namespace exile
 			u8 LoadAllPluginsFromFolder(const exile::String& folder);
 			u8 LoadAllPluginsFromFolder(const exile::core::Path& folder);
 
-
-			exile::core::EnvironmentStorage& GetEnv();
-			exile::UniversalLoggingProtocol& GetULP();
 			exile::core::PluginManager& GetPluginManager();
 			exile::cme::CentralManagmentEngine& GetCME();
 

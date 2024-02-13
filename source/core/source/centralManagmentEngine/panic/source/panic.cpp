@@ -1,3 +1,4 @@
+#define EXILE_PRIVATE
 #include <exile/core/cme/panic.hpp>
 #include <exile/core/instance.hpp>
 

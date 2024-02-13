@@ -11,7 +11,6 @@ namespace exile
 
 			u8 Execute(const exile::Vector<exile::String>& args) override
 			{
-				exile::LogId id = exGEngine.GetULP().GetCoreId();
 
 				exGEngine.GetCME().SetContinueExectionState(false);
 				

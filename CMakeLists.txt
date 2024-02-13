@@ -6,9 +6,13 @@ option(EXILE_ENABLE_TESTS "enable CTests" ON)
 option(EXILE_BUILD_DEV "enable dev build" ON)
 option(EXILE_BUILD_MINGW "enable dev build" OFF)
 option(EXILE_BUILD_APPS "enable applications build" ON)
+option(EXILE_BUILD_WINDOW "enable window plugin build" ON)
+
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/source/cmake")
 
 add_subdirectory("source")
 add_subdirectory("applications")
+
 
 if(EXILE_ENABLE_TESTS)
 	message("EXILE_ENABLE_TESTS = ${EXILE_ENABLE_TESTS}")

@@ -70,11 +70,20 @@
 - [X] - float and int string convertion
 - [X] - check classes and add operators
 - [ ] - threads test
-- [ ] - window module
+- [X] - update variable system (string hashing)
+- [X] - rename EnviromentStorage CVarsystem
+- [X] - separate systems and implementation
+- [X] - System -> impl?
+- [?] - marco for class instance!
+- [ ] - game boot proto
+- [ ] - depency system add data in plugin config file and add function for generate loading sequance
+- [ ] - add passthrought(anyway print message) in release and stop in debug(assert) 
+- [ ] - window module minimal support
+- [ ] - read only cvar variable
 
+
+- [ ] - window module
 - [ ] - refactoring for tests
-- [ ] - core public repo
-- [ ] - window module public repo
 - [ ] - CME graphics mode!
 
 - [ ] - git repo

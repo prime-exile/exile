@@ -151,16 +151,16 @@ int main()
         
         engine.GetPluginManager().LoadPlugin("exDefaultULP");
 
-        exGEngine.GetULP().Log(0, exile::LogLevel::Info, "hi");
-
+        exile::UniversalLoggingProtocol::Get()->Log(exile::UniversalLoggingProtocol::Get()->GetCoreId(), exile::LogLevel::Info, "hi");
+        
         exAssertF(true, { puts("2"); }, "hel;lo %s", "sam");
 
         test();
-
+        
         exile::core::IPlugin* plugin = engine.GetPluginManager().GetPluginByName("exDefaultULP");
         PrintVersion(&plugin->GetVersion());
 
-		engine.GetULP().Log(engine.GetULP().GetCoreId(), exile::LogLevel::Info, "starting loading");
+        exile::UniversalLoggingProtocol::Get()->Log(exile::UniversalLoggingProtocol::Get()->GetCoreId(), exile::LogLevel::Info, "starting loading");
 
 		engine.GetPluginManager().UnloadPlugins();
 	} 
@@ -175,6 +175,6 @@ int main()
 		std::cout << "errno:" << errno << ":" << ex.what() << std::endl;
 
 #endif
-	}
+	} 
 	return 0;
 }

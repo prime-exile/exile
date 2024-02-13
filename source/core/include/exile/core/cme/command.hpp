@@ -19,6 +19,10 @@ namespace exile
 
 			ICommand(){}
 			ICommand(const exile::cme::ICommand&) = delete;
+			virtual const char* GetName()
+			{
+				return "None";
+			}
 
 			exile::cme::ICommand& operator=(exile::cme::ICommand& other) = delete;
 			exile::cme::ICommand& operator==(exile::cme::ICommand& other) = delete;

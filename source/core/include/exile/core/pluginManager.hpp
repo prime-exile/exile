@@ -5,7 +5,6 @@
 #include <exile/core/plugin.hpp>
 #include <exile/ll/ini/iniParser.hpp>
 #include <exile/core/pluginLoader.hpp>
-#include <exile/core/pluginLoader.hpp>
 #include <exile/core/containers/vector.hpp>
 #include <exile/core/containers/stack.hpp>
 
@@ -15,8 +14,27 @@ namespace exile
 	namespace core
 	{
 
-		typedef u8 PluginLoaderId;
+		class EX_API PluginDepencyMap
+		{
+			exile::UnorderedMap<u32, exile::String> names;
+			exile::UnorderedMap<u32, exile::Vector<u32>> dependices;
 
+		public:
+			
+			void RegisterNames(const exile::Vector<exile::String>& names);
+			void RegisterDepency(const exile::String& plugin, const exile::String& depency);
+
+			void TryLoadDep(u32 dep);
+
+			void SortDependices(exile::Vector<u32>& out);
+
+			void TranslateSequence(const exile::Vector<u32>& in, exile::Vector<exile::String>& out);
+
+			void DebugPrintNames();
+
+		};
+
+		typedef u8 PluginLoaderId;
 
 		class EX_API PluginDepencyManager
 		{
@@ -56,9 +74,9 @@ namespace exile
 
 			PluginDepencyManager depencyManager;
 
-			void ConfigureIniParser(exile::ll::IniParser& parser);
 			
 		public:
+			void ConfigureIniParser(exile::ll::IniParser& parser);
 			PluginManager();
 
 			PluginManager(const PluginDepencyManager& other) = delete;

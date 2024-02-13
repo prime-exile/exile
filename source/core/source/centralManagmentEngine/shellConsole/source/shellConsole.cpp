@@ -1,3 +1,4 @@
+#define EXILE_PRIVATE
 #include <exile/core/cme/shellConsole.hpp>
 #include <exile/core/cme/instance.hpp>
 #include <exile/core/containers/string.hpp>

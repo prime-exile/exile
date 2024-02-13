@@ -2,6 +2,6 @@ cmake_minimum_required(VERSION 3.10 FATAL_ERROR)
 
 project("applications")
 
-include("${CMAKE_SOURCE_DIR}/source/cmake/platform.cmake")
+include("exile/platform")
 
 add_subdirectory("exilehost")

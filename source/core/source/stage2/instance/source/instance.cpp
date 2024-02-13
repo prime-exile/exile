@@ -5,9 +5,40 @@
 
 exile::core::Engine exGEngine;
 
+u8 exile::core::Engine::CollectInformation(exile::core::PluginDepencyMap& depMap, const exile::String& folder)
+{
+	constexpr const char* pluginConfigSectionName = "exile_" EXILE_PLATFORM_STRING;
+
+	exile::core::Path dirPath(folder);
+
+	exile::core::Path configurationFilePath(folder + "/exile.ini");
+
+	if (!configurationFilePath.exists()) return 0;
+	exile::ll::IniParser ini;
+	pluginManager.ConfigureIniParser(ini);
+
+	exAssertFR(ini.ParseFromFile(configurationFilePath) != EX_SUCCESS, {}, EX_ERROR, "failed to parse ini file %s", configurationFilePath.Str().c_str());
+
+	const exile::ll::IniInterpretatorSection& pluginConfig = ini.GetInterpretator().GetSection(pluginConfigSectionName);
+	const exile::ll::IniInterpretatorSection& pluginTypeSection = ini.GetInterpretator().GetSection("PluginType");
+	
+	if (ini.GetInterpretator().Containts("Dependices"))
+	{
+		//ini.GetInterpretator().GetSection()
+	}
+	const exile::ll::IniInterpretatorSection& pluginDepsSection = ini.GetInterpretator().GetSection("Dependices");
+	
+	const exile::String pluginEntry = pluginConfig.GetValue("name");
+
+
+}
+
+
 u8 exile::core::Engine::LoadAllPluginsFromFolder(const exile::String& folder)
 {
 	exile::core::DirectoryIterator it(folder);
+
+
 
 	while (!it.IsFinished()) 
 	{
@@ -16,8 +47,12 @@ u8 exile::core::Engine::LoadAllPluginsFromFolder(const exile::String& folder)
 		{
 			if (it.IsDirectory()) 
 			{
-				const exile::String dir = (folder + "/") + currentName;
-				exAssertFR(pluginManager.LoadPlugin(dir) == EX_SUCCESS, {}, EX_ERROR, "failed to load plugin from directory %s", folder.c_str());
+				constexpr const char* pluginConfigSectionName = "exile_" EXILE_PLATFORM_STRING;
+
+
+
+				//const exile::String dir = (folder + "/") + currentName;
+				//exAssertFR(pluginManager.LoadPlugin(dir) == EX_SUCCESS, {}, EX_ERROR, "failed to load plugin from directory %s", folder.c_str());
 			}
 		}
 		++it;
@@ -52,16 +87,6 @@ exile::core::Engine::Engine()
 {
 	pluginManager.AddPluginLoader(&nativePluginLoader);
 	centralManagmentEngine.SetupShell(&consoleShell);
-}
-
-exile::UniversalLoggingProtocol& exile::core::Engine::GetULP()
-{
-	return ulp;
-}
-
-exile::core::EnvironmentStorage& exile::core::Engine::GetEnv()
-{
-	return env;
 }
 
 exile::cme::CentralManagmentEngine& exile::core::Engine::GetCME()

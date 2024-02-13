@@ -14,39 +14,46 @@ namespace exile
 	{
 	private:
 
+		static UniversalLoggingProtocol* impl;
+
+	protected:
+
 		exile::Vector<LogHandler*> handlers;
 		exile::Vector<LogSource> sources;
 		LogId coreId;
 
 	public:
 
+		static void SetupImpl(UniversalLoggingProtocol* impl);
+		static UniversalLoggingProtocol* Get();
+ 
+		virtual const exile::Vector<LogHandler*>& GetLogHandlers();
+		virtual const exile::Vector<LogSource>& GetSources();
+
 		UniversalLoggingProtocol();
 		UniversalLoggingProtocol(const UniversalLoggingProtocol&) = delete;
 
 		const LogId& GetCoreId() const;
 
-		void Log(LogId sourceId, exile::LogLevel Level, const exile::String& desc);
-		void Log(LogId sourceId, exile::LogLevel Level, const char* desc, ...);
+		virtual void Log(LogId sourceId, exile::LogLevel Level, const exile::String& desc);
+		virtual void Log(LogId sourceId, exile::LogLevel Level, const char* desc, ...);
 
-		u8 RegisterSource(const LogSource& source);
-		u8 RegisterSource(const LogSource& source, LogId& sourceId);
+		virtual u8 RegisterSource(const LogSource& source);
+		virtual u8 RegisterSource(const LogSource& source, LogId& sourceId);
 
-		u8 RegisterHandler(LogHandler* handler);
-		u8 RegisterHandler(LogHandler* handler, LogId& handlerId);
+		virtual u8 RegisterHandler(LogHandler* handler);
+		virtual u8 RegisterHandler(LogHandler* handler, LogId& handlerId);
 
-		u8 RemoveSource(const exile::String& name);
-		u8 RemoveHandler(const exile::String& name);
+		virtual u8 RemoveSource(const exile::String& name);
+		virtual u8 RemoveHandler(const exile::String& name);
 
-		void RemoveSource(const LogId id);
-		void RemoveHandler(const LogId id);
+		virtual void RemoveSource(const LogId id);
+		virtual void RemoveHandler(const LogId id);
 
 		exile::UniversalLoggingProtocol& operator=(exile::UniversalLoggingProtocol& other) = delete;
 		exile::UniversalLoggingProtocol& operator==(exile::UniversalLoggingProtocol& other) = delete;
 
-		~UniversalLoggingProtocol()
-		{
-
-		}
+		virtual ~UniversalLoggingProtocol(){}
 
 	};
 }

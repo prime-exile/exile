@@ -1,19 +1,28 @@
+#define EXILE_PRIVATE
 #include <exile/core/cme/instance.hpp>
 #include <exile/core/instance.hpp>
 
 #include "commands/echo.hpp"
 #include "commands/exit.hpp"
 #include "commands/setv.hpp"
+#include "commands/getSysErr.hpp"
+
+
 
 exile::cme::CmdEcho cmdEcho;
 exile::cme::CmdExit cmdExit;
 exile::cme::CmdSetV cmdSetV;
+exile::cme::CmdCreateV cmdCreateV;
+exile::cme::CmdGetSysErr cmdGetSysErr;
 
 exile::cme::CentralManagmentEngine::CentralManagmentEngine()
 {
 	cmdEngine.RegisterCommand("echo", &cmdEcho);
 	cmdEngine.RegisterCommand("exit", &cmdExit);
 	cmdEngine.RegisterCommand("setV", &cmdSetV);
+	cmdEngine.RegisterCommand("createV", &cmdCreateV);
+	cmdEngine.RegisterCommand("getSysErr", &cmdGetSysErr);
+	
 }
 
 void exile::cme::CentralManagmentEngine::SetupShell(IShell* currentShell)
