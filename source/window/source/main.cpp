@@ -43,8 +43,8 @@ extern "C"
 		if(display != NULL)
 		{
 			wl_display_disconnect(display);
-#endif
 		}
+#endif
 #if defined(EXILE_UNIX) && defined(EXILE_WINDOW_X11)
 		if (display != NULL)
 		{

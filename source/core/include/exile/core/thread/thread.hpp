@@ -7,7 +7,7 @@ extern "C"
 }
 
 #include <exile/core/containers/function.hpp>
-#include <exile/core/api.h>
+#include <exile/core/API.h>
 
 namespace exile
 {
