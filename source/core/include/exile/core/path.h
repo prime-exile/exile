@@ -50,6 +50,7 @@ EX_API u8 exFilePathInit2(exFilePath* path, const char* newPath);
 EX_API exFilePathType exFilePathGetType(exFilePath* path);
 EX_API const char* exFilePathGetFileExtension(exFilePath* path);
 EX_API void exFilePathGetFileName(exFilePath* path, char* buffer, u16 len);
+EX_API const char* exFilePathGetCStr(const exFilePath* path);
 
 EX_API void exFilePathFree(exFilePath* path);
 

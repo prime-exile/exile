@@ -84,7 +84,7 @@ u8 exLoadCriticalConfiguration(const char* file)
 	u8 readValue = EX_FALSE;
 	u8 readPlatformSection = EX_FALSE;
 	u8 readValueStarted = EX_FALSE;
-	while (EX_TRUE)
+	for(;;)
 	{
 		int rc = getc(f);
 		if (rc == EOF)
