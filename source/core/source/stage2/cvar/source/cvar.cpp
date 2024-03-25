@@ -46,6 +46,7 @@ namespace exile
 				if (cvars != NULL)
 				{
 					exile::memory::FreeArr(cvars);
+					cvars = NULL;
 				}
 			}
 
@@ -151,6 +152,13 @@ namespace exile
 				:stringCVars(200), floatCVars(1000), intCVars(1000)
 			{
 
+			}
+
+			~CVarSystemImpl()
+			{
+				stringCVars.Clear();
+				floatCVars.Clear();
+				intCVars.Clear();
 			}
 
 			u8 Containts(u32 hash) override
@@ -278,10 +286,16 @@ namespace exile
 	}
 }
 
+#if defined(EXILE_BUILD_FORGE)
+exile::core::CVarSystem* exile::core::CVarSystem::impl = NULL;
+#else
 static exile::core::CVarSystemImpl defaultImpl;
+exile::core::CVarSystem* exile::core::CVarSystem::impl = &defaultImpl;
+#endif
+
+
 
 bool exile::core::CVarSystem::freeMemory = false;
-exile::core::CVarSystem* exile::core::CVarSystem::impl = &defaultImpl;
 
 
 void exile::core::CVarSystem::SetupImpl(CVarSystem* impl, bool freeMemory)
@@ -292,8 +306,13 @@ void exile::core::CVarSystem::SetupImpl(CVarSystem* impl, bool freeMemory)
 
 void exile::core::CVarSystem::SetupDefaultImpl()
 {
+#if defined(EXILE_BUILD_FORGE)
+	freeMemory = true;
+	impl = exile::memory::Alloc<exile::core::CVarSystemImpl>();
+#else
 	freeMemory = false;
 	impl = &defaultImpl;
+#endif
 }
 
 

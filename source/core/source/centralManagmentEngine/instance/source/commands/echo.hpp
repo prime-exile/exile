@@ -11,6 +11,9 @@ namespace exile
 		class CmdEcho : public exile::cme::ICommand
 		{
 		public:
+
+
+
 			const char* GetName() override
 			{
 				return "echo";
@@ -18,7 +21,7 @@ namespace exile
 
 			u8 Execute(const exile::Vector<exile::String>& args) override
 			{
-				exile::core::Engine& engine = exGEngine;
+				exile::core::Engine* engine = exGEngine;
 				exile::UniversalLoggingProtocol* ulp = exile::UniversalLoggingProtocol::Get();
 				
 				exile::LogId id = ulp->GetCoreId();
@@ -29,7 +32,7 @@ namespace exile
 					{
 						if (arg == "$stacktrace")
 						{
-							exile::cme::CentralManagmentEngine& managment = engine.GetCME();
+							exile::cme::CentralManagmentEngine& managment = engine->GetCME();
 							exile::UniversalLoggingProtocol::Get()->Log(id, exile::LogLevel::Info, "cme stacktrace");
 							for (const exile::String& entry : managment.GetStacktrace())
 							{
@@ -38,7 +41,7 @@ namespace exile
 						}
 						else if (arg == "$panic_msg")
 						{
-							exile::cme::CentralManagmentEngine& managment = engine.GetCME();
+							exile::cme::CentralManagmentEngine& managment = engine->GetCME();
 							ulp->Log(id, exile::LogLevel::Info, "cme panic message: \' %s \'", managment.GetPanicMessage().c_str());
 						}
 						else if (arg == "$dtcbuild")
@@ -47,14 +50,14 @@ namespace exile
 						}
 						else if (arg == "$thread_id")
 						{
-							ulp->Log(id, exile::LogLevel::Info, "panic thread id = \'%" PRIu64 "\'", engine.GetCME().GetThreadId());
+							ulp->Log(id, exile::LogLevel::Info, "panic thread id = \'%" PRIu64 "\'", engine->GetCME().GetThreadId());
 						}
 						else if (arg == "$report")
 						{
-							engine.GetCME().GetCommandEngine().Execute("echo $dtcbuild");
-							engine.GetCME().GetCommandEngine().Execute("echo $panic_msg");
-							engine.GetCME().GetCommandEngine().Execute("echo $stacktrace");
-							engine.GetCME().GetCommandEngine().Execute("echo $thread_id");
+							engine->GetCME().GetCommandEngine().Execute("echo $dtcbuild");
+							engine->GetCME().GetCommandEngine().Execute("echo $panic_msg");
+							engine->GetCME().GetCommandEngine().Execute("echo $stacktrace");
+							engine->GetCME().GetCommandEngine().Execute("echo $thread_id");
 						}
 						else
 						{

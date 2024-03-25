@@ -55,4 +55,5 @@ void exSetupCriticalDefaultConfiguration()
 {
 	mdl.moduleType = exNativeModuleType_InBuilt;
 	gExileCriticalInstance.panic = exDefaultPanic;
+	gExileCriticalInstance.warn = exDefaultPanic;
 }

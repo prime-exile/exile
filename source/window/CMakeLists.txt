@@ -45,4 +45,3 @@ if(EXILE_WINDOW_USE_LINUX_X11)
 endif()
 
 add_subdirectory("source")
-add_subdirectory("loader")

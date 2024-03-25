@@ -12,7 +12,7 @@ namespace exile
 			u8 Execute(const exile::Vector<exile::String>& args) override
 			{
 
-				exGEngine.GetCME().SetContinueExectionState(false);
+				exGEngine->GetCME().SetContinueExectionState(false);
 				
 				return EX_SUCCESS;
 			}

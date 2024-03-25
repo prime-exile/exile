@@ -36,3 +36,4 @@ elseif(EXILE_ARCH STREQUAL "ARM64")
 endif()
 
 include ("exile/configuration")
+include ("exile/forge")

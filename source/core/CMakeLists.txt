@@ -6,7 +6,6 @@ if(EXILE_BUILD_DEV)
 add_compile_definitions(EXILE_DEV)
 endif()
 
-
 option(EXILE_ULP_LOG_OPTIMIZED_MODE "in this mode formatted log we have 1024 buffer size" OFF)
 option(EXILE_ULP_LOG_DYNAMIC_MODE "in this mode formatted log we have 1024 buffer size but if we have bigger message we allocate new buffer" ON)
 option(EXILE_ULP_LOG_FULL_DYNAMIC_MODE "in this mode formatted log we allocate new buffer for message" OFF)
@@ -19,27 +18,15 @@ elseif(EXILE_ULP_LOG_FULL_DYNAMIC_MODE)
 add_compile_definitions(EXILE_ULP_LOG_FULL_DYNAMIC)
 endif()
 
-set(EXILE_CUSTOM_PATH_LEN CACHE STRING "custom max path len")
-option(EXILE_DYNAMIC_PATH_LEN "enable windows long path(see in docs)" ON)
-if(EXILE_DYNAMIC_PATH_LEN)
-	add_compile_definitions(EXILE_DYNAMIC_PATH_LEN)
-	message("[exile]: using dynamic path len")
-	set(EX_DYN_PATH ON)
-elseif(EXILE_CUSTOM_PATH_LEN)
-	add_compile_definitions(EXILE_CUSTOM_PATH_LEN=${EXILE_CUSTOM_PATH_LEN})
-	message("[exile]: using custom path len = ${EXILE_CUSTOM_PATH_LEN}")
-	set(EX_DYN_PATH OFF)
-elseif(ENABLE_EXILE_WIN_LONG_PATH)
-	add_compile_definitions(EXILE_WIN_LONG_PATH)
-	set(EX_DYN_PATH OFF)
-else()
-	set(EX_DYN_PATH OFF)
-endif()
+
+
+
 
 add_compile_definitions(EX_VERSION_STRING="exp:0.0.1")
 
 add_library(exile.core SHARED)
 add_subdirectory("source")
+
 
 target_include_directories(exile.core PUBLIC "include/")
 target_include_directories(exile.core PRIVATE "private/include/")

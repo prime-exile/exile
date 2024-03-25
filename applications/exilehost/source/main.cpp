@@ -146,10 +146,10 @@ int main()
 
         puts(EX_BUILD_DATETIME);
         
-		exile::core::Engine& engine = exGEngine;
+		exile::core::Engine* engine = exGEngine;
         exile::cme::InstallPanicHandler();
         
-        engine.GetPluginManager().LoadPlugin("exDefaultULP");
+        engine->GetPluginManager().LoadPlugin("exDefaultULP");
 
         exile::UniversalLoggingProtocol::Get()->Log(exile::UniversalLoggingProtocol::Get()->GetCoreId(), exile::LogLevel::Info, "hi");
         
@@ -157,12 +157,12 @@ int main()
 
         test();
         
-        exile::core::IPlugin* plugin = engine.GetPluginManager().GetPluginByName("exDefaultULP");
+        exile::core::IPlugin* plugin = engine->GetPluginManager().GetPluginByName("exDefaultULP");
         PrintVersion(&plugin->GetVersion());
 
         exile::UniversalLoggingProtocol::Get()->Log(exile::UniversalLoggingProtocol::Get()->GetCoreId(), exile::LogLevel::Info, "starting loading");
 
-		engine.GetPluginManager().UnloadPlugins();
+		engine->GetPluginManager().UnloadPlugins();
 	} 
     catch (const std::out_of_range& ofr)
     {

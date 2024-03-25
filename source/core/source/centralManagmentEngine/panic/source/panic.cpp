@@ -38,11 +38,15 @@ static u8 exCMEPanic(const char* message, const char* filename, const u64 line, 
 	exile::String strBuffer(buffer);
 	exFree(buffer);
 	
-	return exGEngine.GoToCMEPanic(strBuffer.c_str());
+	return exGEngine->GoToCMEPanic(strBuffer.c_str());
 }
 
 EXILE_API_EXPORT
 void exile::cme::InstallPanicHandler()
 {
-	exSetupCriticalConfiguration(exCMEPanic);
+	/*
+		TO DO:
+		make cme warning handler
+	*/
+	exSetupCriticalConfiguration(exCMEPanic, exCMEPanic);
 }

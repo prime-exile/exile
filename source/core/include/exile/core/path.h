@@ -52,6 +52,9 @@ EX_API const char* exFilePathGetFileExtension(exFilePath* path);
 EX_API void exFilePathGetFileName(exFilePath* path, char* buffer, u16 len);
 EX_API const char* exFilePathGetCStr(const exFilePath* path);
 
+EX_API u8 exFilePathCopy(exFilePath* dest, const exFilePath* src);
+EX_API u8 exFilePathAppend(exFilePath* path, char c);
+
 EX_API void exFilePathFree(exFilePath* path);
 
 

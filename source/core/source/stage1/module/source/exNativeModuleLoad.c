@@ -34,8 +34,6 @@ u8 exNativeModuleLoad(exNativeModule* mdl, const char* path)
 			(LPTSTR)&lpMsgBuf,
 			0, NULL);
 
-		printf("Failed to load library: error code %lu\n", dw);
-		printf("Error message: %s\n", (LPCTSTR)lpMsgBuf);
 		exPanicF("[exLoadModule]: failed to load module %s. error: %s", path, (LPCTSTR)lpMsgBuf);
 		LocalFree(lpMsgBuf);
 

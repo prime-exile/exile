@@ -105,14 +105,14 @@ int main()
 		u64 hres = exile::hash::fnv1a32("hello world");
 		std::cout << "hres =" << hres << std::endl;
 
-		auto& engine = exGEngine;
+		auto engine = exGEngine;
 
 		exile::core::CVarSystem::SetupDefaultImpl();
 
 		exile::core::CVarSystem::Get()->CreateStringCVar("test.int", "tester", "sd3", "ss2");
 
 		exile::core::CVarDesc* desc = exile::core::CVarSystem::Get()->GetCVar(exile::hash::fnv1a32("test.int"));
-		u8 res = engine.GetPluginManager().LoadPlugin("exDefaultULP");
+		u8 res = engine->GetPluginManager().LoadPlugin("exDefaultULP");
 
 		exile::Thread th;
 		ThreadArguments ar;
@@ -148,7 +148,7 @@ int main()
 		//engine.GetULP().Log(engine.GetULP().GetCoreId(), exile::LogLevel::Info, "hello %s help %s ! miea", "strrep", "me");
 
 
-		engine.GetPluginManager().UnloadPlugins();
+		engine->GetPluginManager().UnloadPlugins();
 	}
 	catch (const std::exception& ex)
 	{

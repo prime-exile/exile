@@ -47,6 +47,6 @@ namespace exile
 	}
 }
 
-extern EX_API exile::core::Engine exGEngine;
+extern EX_API exile::core::Engine* exGEngine;
 
 #endif

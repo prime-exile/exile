@@ -7,6 +7,9 @@ option(EXILE_BUILD_DEV "enable dev build" ON)
 option(EXILE_BUILD_MINGW "enable dev build" OFF)
 option(EXILE_BUILD_APPS "enable applications build" ON)
 option(EXILE_BUILD_WINDOW "enable window plugin build" ON)
+option(EXILE_BUILD_FORGE "enable forge(please see firstly before enable it)" OFF)
+
+
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/source/cmake")
 

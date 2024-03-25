@@ -9,6 +9,8 @@ int main()
 	exFilePath p;
 	exFilePathInit2(&p, "critical.conf");
 
+	exFilePathAppend(&p, 'd');
+	
 	clock_t start, end;
 	double cpu_time_used;
 

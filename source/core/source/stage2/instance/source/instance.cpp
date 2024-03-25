@@ -3,7 +3,14 @@
 #include <exile/core/fs/DirectoryIterator.hpp>
 
 
-exile::core::Engine exGEngine;
+
+#if defined(EXILE_BUILD_FORGE)
+exile::core::Engine* exGEngine = NULL;
+#else
+exile::core::Engine _exEngine{};
+exile::core::Engine* exGEngine = &_exEngine;
+#endif
+
 
 u8 exile::core::Engine::CollectInformation(exile::core::PluginDepencyMap& depMap, const exile::String& folder)
 {

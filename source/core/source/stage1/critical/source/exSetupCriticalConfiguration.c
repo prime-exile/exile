@@ -4,7 +4,7 @@
 
 extern exNativeModule mdl;
 
-EXILE_API_EXPORT void exSetupCriticalConfiguration(PFNexPanic newPanic)
+EXILE_API_EXPORT void exSetupCriticalConfiguration(PFNexPanic newPanic, PFNexWarning newWarning)
 {
 	if(mdl.handle != NULL)
 	{
@@ -12,5 +12,6 @@ EXILE_API_EXPORT void exSetupCriticalConfiguration(PFNexPanic newPanic)
 	}
 
 	gExileCriticalInstance.panic = newPanic;
+	gExileCriticalInstance.warn = newWarning;
 	mdl.moduleType = exNativeModuleType_InBuilt;
 }

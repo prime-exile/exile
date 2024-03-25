@@ -75,10 +75,12 @@
 - [X] - separate systems and implementation
 - [X] - System -> impl?
 - [?] - marco for class instance!
-- [ ] - unified Conf file for ciritical and forge
-- [ ] - application boot proto
-- [ ] - depency system add data in plugin config file and add function for generate loading sequance
+- [X] - add space support
+- [?] - stage1 allocate callbacks?
+- [ ] - forge dll or app?
+- [ ] - forge as mechinsm for configure engine modification
 - [ ] - add passthrought(anyway print message) in release and stop in debug(assert) 
+- [ ] - depency system add data in plugin config file and add function for generate loading sequance
 - [ ] - window module minimal support
 - [ ] - read only cvar variable
 
@@ -87,6 +89,8 @@
 - [ ] - refactoring for tests
 - [ ] - CME graphics mode!
 
+- [ ] - renderer
+- [ ] - remote render protocol?
 - [ ] - git repo
 - [ ] - variable refrances?
 - [ ] - plugins load sequance

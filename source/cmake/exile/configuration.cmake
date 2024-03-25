@@ -12,3 +12,8 @@ if(EXILE_VARIABLE_STORAGE_DISABLE)
 	add_compile_definitions(EXILE_DISABLE_VAR_STORAGE)
 	message("[exile]: variable storage disabled!")
 endif()
+
+message("EXILE_BUILD_FORGE = ${EXILE_BUILD_FORGE}")
+if(EXILE_BUILD_FORGE)
+	add_compile_definitions(EXILE_BUILD_FORGE)
+endif()

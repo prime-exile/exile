@@ -65,4 +65,36 @@ static __forceinline void exString512xCopy(exString512x* dest, exString512x* src
 	exMemcpy(dest->buffer, src->buffer, 512);
 }
 
+typedef struct
+{
+	u8 occupied;
+	char buffer[1024];
+}exString1024x;
+
+
+static __forceinline void exString1024xInit(exString1024x* str)
+{
+	str->occupied = 0;
+	exMemset(str->buffer, 0, 1024);
+}
+
+static __forceinline void exString1024xPushChar(exString1024x* str, char s)
+{
+	str->buffer[str->occupied] = s;
+	str->occupied += 1;
+}
+
+static __forceinline void exString1024xClear(exString1024x* str)
+{
+	str->occupied = 0;
+	exMemset(str->buffer, 0, 1024);
+}
+
+static __forceinline void exString1024xCopy(exString1024x* dest, exString1024x* src)
+{
+	dest->occupied = src->occupied;
+	exMemcpy(dest->buffer, src->buffer, 1024);
+}
+
+
 #endif

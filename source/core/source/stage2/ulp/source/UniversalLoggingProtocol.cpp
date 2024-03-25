@@ -26,9 +26,13 @@ static __forceinline u8 contains(const exile::Vector<exile::LogHandler*>& vec, c
 }
 
 
-static exile::UniversalLoggingProtocol defaultImpl;
 
+#if defined(EXILE_BUILD_FORGE)
+exile::UniversalLoggingProtocol* exile::UniversalLoggingProtocol::impl = NULL;
+#else
+static exile::UniversalLoggingProtocol defaultImpl;
 exile::UniversalLoggingProtocol* exile::UniversalLoggingProtocol::impl = &defaultImpl;
+#endif
 
 void exile::UniversalLoggingProtocol::SetupImpl(UniversalLoggingProtocol* impl)
 {

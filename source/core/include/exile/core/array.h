@@ -89,7 +89,7 @@ static __forceinline u8 exArrayResize(exArray* arr, u64 newSize)
 	return EX_SUCCESS;
 }
 
-static __forceinline u8 exArrayCopy(exArray* dest, exArray* source)
+static __forceinline u8 exArrayCopy(exArray* dest, const exArray* source)
 {
 	if (dest->allocated == source->allocated)
 	{

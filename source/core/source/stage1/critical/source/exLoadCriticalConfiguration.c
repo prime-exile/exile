@@ -10,13 +10,15 @@
 typedef struct
 {
 	char filename[512];
-	char function[512];
+	char panicFunction[512];
+	char warnFunction[512];
 } exCriticalConfiguration;
 
 exNativeModule mdl;
 
 exCriticalInstance gExileCriticalInstance = {
-	.panic = NULL
+	.panic = NULL,
+	.warn = NULL
 };
 
 #define LRETURN_IF_FAILED(pred, func)\
@@ -39,7 +41,8 @@ typedef enum
 {
 	exCriticalConfigurationFieldId_None,
 	exCriticalConfigurationFieldId_File,
-	exCriticalConfigurationFieldId_Function
+	exCriticalConfigurationFieldId_PanicFunction,
+	exCriticalConfigurationFieldId_WarnFunction
 } exCriticalConfigurationFieldId;
 
 static __forceinline void exLoadCriticalApplyFieldValue(exCriticalConfiguration* conf, exCriticalConfigurationFieldId fid, exString512x* value)
@@ -49,8 +52,11 @@ static __forceinline void exLoadCriticalApplyFieldValue(exCriticalConfiguration*
 	case exCriticalConfigurationFieldId_File:
 		exMemcpy(conf->filename, value->buffer, value->occupied);
 		break;
-	case exCriticalConfigurationFieldId_Function:
-		exMemcpy(conf->function, value->buffer, value->occupied);
+	case exCriticalConfigurationFieldId_PanicFunction:
+		exMemcpy(conf->panicFunction, value->buffer, value->occupied);
+		break;
+	case exCriticalConfigurationFieldId_WarnFunction:	
+		exMemcpy(conf->warnFunction, value->buffer, value->occupied);
 		break;
 	default:
 		return;
@@ -132,7 +138,8 @@ u8 exLoadCriticalConfiguration(const char* file)
 			if (c == '=')
 			{
 				EX_CRITICAL_CONFIGURATION_FIELD_DEFINE("file", exCriticalConfigurationFieldId_File, readerString);
-				EX_CRITICAL_CONFIGURATION_FIELD_DEFINE("function", exCriticalConfigurationFieldId_Function, readerString);
+				EX_CRITICAL_CONFIGURATION_FIELD_DEFINE("exPanicFunction", exCriticalConfigurationFieldId_PanicFunction, readerString);
+				EX_CRITICAL_CONFIGURATION_FIELD_DEFINE("exWarnFunction", exCriticalConfigurationFieldId_WarnFunction, readerString);
 			}
 			else if (c == ' ' || c == '\t' || c == '\n' || c == '\r')
 			{
@@ -166,7 +173,7 @@ u8 exLoadCriticalConfiguration(const char* file)
 
 	fclose(f);
 
-	exAssertFR(exSetupCriticalConfigurationFromModule(conf.filename, conf.function) == EX_ERROR, {}, EX_ERROR, "failed to load configuration from file %s", file);
+	exAssertFR(exSetupCriticalConfigurationFromModule(conf.filename, conf.panicFunction, conf.warnFunction) == EX_ERROR, {}, EX_ERROR, "failed to load configuration from file %s", file);
 	
 	return EX_SUCCESS;
 }

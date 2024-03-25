@@ -81,6 +81,11 @@ namespace exile
 			virtual CVarDesc* CreateFloatCVar(const char* name, const char* desc, const f64 defaultValue, const f64 currentValue) = 0;
 			virtual u8 SetFloatCVarVal(const char* name, const f64 val) = 0;
 			virtual u8 SetFloatCVarVal(u32 hash, const f64 val) = 0;
+
+			virtual ~CVarSystem()
+			{
+
+			}
 		};
 
 		struct AutoCVar
